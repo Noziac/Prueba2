@@ -21,9 +21,9 @@ class Usuario(models.Model):       #Considerando usar AbastractUser
 class Version(models.Model):
     id_version = models.AutoField(primary_key=True)
     nombre_version = models.CharField(max_length=50)
-    descripcion = models.TextField()
+    descripcion = models.TextField(null="True", blank="True")
     precio = models.DecimalField(max_digits=10, decimal_places=2)
-    caracteristicas = models.TextField()
+    caracteristicas = models.TextField(null="True", blank="True")
     activo = models.BooleanField(default=True) #Para quitar o poner versiones
 
     def __str__(self):
@@ -37,7 +37,7 @@ class BaseExtension(models.Model):
         ('pve', 'PvE'),
     ]
     nombre_extension = models.CharField(max_length=100)
-    descripcion = models.TextField()
+    descripcion = models.TextField(null="True", blank="True")
     precio = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:

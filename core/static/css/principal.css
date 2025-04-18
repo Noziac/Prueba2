@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(34, 34, 34);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
+    background-size: cover;      /* Cubre todo el viewport */
+    background-attachment: fixed; /* Mantiene el fondo fijo durante el scroll */
+    background-position: center;  /* Centra la imagen de fondo */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}
+
+/* GRID GENERAL */
+.parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0px;
+    scroll-snap-type: y mandatory; /* Activa el scroll snap vertical */
+    overflow-y: scroll; /* Permite el scroll vertical */
+    scroll-behavior: smooth; /* Opcional: scroll suave */
+    height: 100vh; /* Asegura que el contenedor principal ocupe toda la altura */
+    overflow-x: hidden; /* Oculta el scroll horizontal innecesario */
+    background-color: red;
+}
+ 
+/**********  HEADER  **********/
+.div1 {
+    width: 100%;
+    height: 50px;
+    grid-column: span 12 / span 12;
+}
+
+#cont-top {
+    position: fixed; /* Permite que la barra permanezca fija */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Asegura una altura para el header */
+    background-color: rgba(35, 35, 35, 1);
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
+    z-index: 999; /* Asegura que la barra esté por encima de otros elementos */
+    display: flex; /* Habilita Flexbox */
+    justify-content: space-between; /* Espacia logo a la izquierda y el icono a la derecha */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 0 20px; /* Añade espacio a los lados */
+}
+
+#cont-logo {
+    display: flex; /* Por si acaso, para alinear contenido interno si lo hubiera */
+    align-items: center;
+}
+
+#cont-logo img {
+    max-width: 120px;
+    height: auto;
+}
+
+#buttons a {
+    display: inline-block; /* Asegura que los enlaces se alineen horizontalmente */
+    padding: 10px 20px;
+    color: rgb(245, 245, 220);
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Espacio entre botones */
+}
+
+#buttons a:hover {
+    color: rgb(34, 34, 34);
+    background-color: rgba(240, 245, 220, 0.8);
+}
+
+/* Estilo compartido para enlaces y botones */
+.button-style {
+    display: inline-block; /* Hace que los elementos se comporten como botones */
+    padding: 10px 20px; /* Añade espaciado interno */
+    color: rgb(245, 245, 220); /* Color del texto */
+    text-decoration: none; /* Elimina subrayado (sin efecto en botones) */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto */
+    font-size: 1rem; /* Ajusta el tamaño del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre ellos */
+    transition: background-color 0.3s ease; /* Transición suave en el hover */
+}
+
+.button-style:hover {
+    background-color: rgb(250, 250, 250); /* Color en hover */
+}
+
+/**********  TRAILER  **********/
+.div2 {
+    grid-column: span 12 / span 12;
+    background-color: rgb(34, 34, 34);
+}
+
+#cont-trailer {
+    position: relative;
+    width: 100vw; /* Ocupa todo el ancho del viewport */
+    height: 100vh; /* Ocupa todo el alto del viewport */
+    margin: 0 auto; /* Centrar horizontalmente */
+    overflow: hidden;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+#cont-trailer iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ocupa todo el ancho del viewport */
+    height: 100vh; /* Ocupa todo el alto del viewport */
+    border: 0;
+}
+
+/**********  CARRUSEL  **********/
+.div3 {
+    grid-column: span 12 / span 12;
+    background-color: rgb(34, 34, 34);
+}
+
+#ind{
+    margin-bottom: 3%;
+}
+
+#sld1, #sld2, #sld3, #sld4, #sld5, #sld6 {
+    margin-bottom: 2%;
+}
+
+#carousel-example {
+    width: 100vw; /* Ocupa todo el ancho del viewport */
+    height: 100vh; /* Ocupa todo el alto del viewport */
+    overflow: hidden; /* Evita el desbordamiento */
+    position: relative; /* Asegura que los controles y el contenido se ubiquen correctamente */
+}
+
+#carouselExampleCaptions {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-inner .carousel-item video.d-block.w-100 {
+    object-fit: cover;
+    height: 100vh;
+}
+
+.carousel-caption {
+    display: block !important;
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    bottom: 20px; /* Ajusta la posición vertical */
+    color: rgb(245, 245, 220);
+    font-size: 0.8rem;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+#carouselExampleCaptions {
+    position: relative; /* Necesario para posicionar el pseudo-elemento */
+}
+
+#carouselExampleCaptions::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Negro semitransparente */
+    z-index: 2; /* Encima de los videos (z-index de .carousel-inner suele ser 0) */
+    pointer-events: none; /* Permite interacción con los videos */
+}
+
+.carousel-item {
+    position: relative; /* Para posicionar el contenido dentro del slide */
+}
+
+.carousel-item video.d-block.w-100 {
+    object-fit: cover;
+    height: 100vh; /* O la altura deseada */
+    width: 100%;
+    display: block; /* Asegura que el video ocupe el ancho */
+}
+
+.carousel-caption {
+    position: absolute;
+    z-index: 3; /* Asegura que el texto esté encima de la capa */
+    /* Otros estilos del caption */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 3; /* Asegura que los controles estén encima de la capa */
+}
+
+.carousel-indicators {
+    z-index: 3; /* Asegura que los indicadores estén encima de la capa */
+}
+
+/********** SPECS  **********/
+.div4 {
+    grid-column: span 12 / span 12;
+}
+
+#specs {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Añade un fondo para legibilidad */
+}
+
+#specs h3 {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+    color: white;
+    border-bottom: 1px solid white; /* Añade un separador */
+    padding-bottom: 5px;
+}
+
+#specs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    color: white;
+}
+
+#specs li {
+    margin-bottom: 5px; /* Reduce el espacio entre elementos */
+    font-size: 0.9rem; /* Ajusta el tamaño del texto */
+}
+
+/**********  CREADORES  **********/
+.div5 {
+    grid-column: span 12 / span 12;
+    background-image: url(../img/cont.jpg);
+}
+
+#cont-creators {
+    width: 100vh;
+    height: 100vh;
+    display: flex; /* Para mostrar uno o dos streamers lado a lado */
+    justify-content: center; /* Centrar horizontalmente si solo hay uno o espacio entre dos */
+    align-items: center; /* Centrar verticalmente */
+    padding: 20px;
+    /* Otros estilos de fondo si los tienes */
+}
+
+.creator-block {
+    display: flex; /* Para alinear imagen, info e icono */
+    align-items: center;
+    margin: 10px 20px; /* Espacio entre bloques de streamers */
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo para legibilidad */
+    padding: 15px;
+    border-radius: 8px;
+    position: relative; /* Para posicionar el icono de Twitch */
+}
+
+.creator-info {
+    display: flex;
+    align-items: center;
+}
+
+.creator-info img {
+    width: 50px; /* Ajusta el tamaño de la imagen */
+    height: 50px;
+    border-radius: 50%; /* Imagen circular */
+    margin-right: 10px;
+}
+
+.creator-info h3 {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.creator-info p {
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+.twitch-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 40px; /* Ajusta el tamaño del icono */
+    height: auto;
+}
+
+.twitch-icon img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/**********  FOOTER  **********/
+.div6 {
+    grid-column: span 12 / span 12;
+    background-color: rgb(34, 34, 34);
+}
+
+#cont-footer {
+    width: 100%;
+    height: 50px;
+    background-color: #222; /* Fondo oscuro */
+    color: #fff;             /* Texto blanco */
+    text-align: center;
+    padding: 10px 0;
+}
+        
+/**********  EXTRAS  **********/
+.scroll-section {
+    scroll-snap-align: center; /* Centra las secciones en el scroll snap */
+}

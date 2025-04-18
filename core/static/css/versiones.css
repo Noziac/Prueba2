@@ -1,0 +1,171 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(34, 34, 34);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/**********  GRID GENERAL  **********/
+.parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    background-color: rgb(14, 14, 14);
+    gap: 0px;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    /* height: 100vh; */
+    overflow-x: hidden;
+    /* overflow-y: scroll; */ 
+    /* background-color: red; */
+}
+
+/**********  HEADER  **********/
+.div1 {
+    width: 100%;
+    height: 50px;
+    grid-column: span 12 / span 12;
+}
+
+#cont-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(35, 35, 35, 1);
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+#cont-logo {
+    display: flex;
+    align-items: center;
+}
+
+#cont-logo img {
+    max-width: 120px;
+    height: auto;
+}
+
+#buttons a {
+    display: inline-block;
+    padding: 3px 20px;
+    color: rgb(245, 245, 220);
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.2);
+}
+
+#buttons a:hover {
+    color: rgb(34, 34, 34);
+    background-color: rgba(240, 245, 220, 0.8);
+}
+
+/**********  VERSIONES  **********/
+.div2 {
+    grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
+    padding: 20px;
+    margin-top: 5px; /* Para no quedar debajo del header fijo */
+    display: flex;
+    flex-direction: column; /* Organiza el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    background-color: back;
+    background-size: size;
+    background-repeat: no-repeat;
+    background-position: inherit;
+    width: 100vw;
+    height: auto;
+}
+
+#cont-version {
+    color: #e0e0e0; /* Color de texto general para la sección */
+    padding: 20px; /* Añade un poco de padding alrededor del contenedor principal */
+    width: 100%; /* Asegura que el contenedor de versiones ocupe el ancho disponible */
+}
+
+/* Estilos para la lista de versiones detalladas */
+#cont-version .version-list {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsivo para los items de versión */
+    gap: 20px;
+}
+
+#cont-version .version-item {
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center; /* Centra el contenido de cada item */
+}
+
+#cont-version .version-img img{
+    width: 45%;
+}
+
+#cont-version .version-item h3 {
+    color: #f0f0f0;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+#cont-version .version-item p {
+    line-height: 1.5;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+#cont-version .version-item .price {
+    color: #d4aa70;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#cont-version .version-item .buy-btn {
+    background-color: #d4aa70; /* Botón dorado */
+    color: #1a1a1a; /* Texto oscuro */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#cont-version .version-item .buy-btn:hover {
+    background-color: #f0c28a; /* Dorado más claro al pasar el ratón */
+}
+
+/**********  FOOTER  **********/
+.div3 {
+    grid-column: span 12 / span 12;
+    background-color: rgba(35, 35, 35, 1);
+}
+
+#cont-footer {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(35, 35, 35, 1);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}

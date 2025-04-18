@@ -1,0 +1,154 @@
+/**********  MENSAJE ROTACION  **********/
+#rotate-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de todo */
+    text-align: center;
+    font-size: 1.5em;
+    padding: 20px;
+}
+
+#rotate-message.hidden {
+    display: none;
+}
+
+@media (orientation: landscape) {
+    #rotate-message {
+        display: none;
+    }
+}
+
+/* Responsividad: Pantallas Pequeñas */
+@media (max-width: 768px) {
+    #buttons {
+        display: none; /* Oculta botones en pantallas pequeñas */
+    }
+    /* El #menu-icon ya tiene estilos para mostrarse */
+    #cont-top {
+        justify-content: space-between; /* Espacia el logo a la izquierda y el icono a la derecha */
+    }
+}
+
+/* Ocultar el icono de categorías y el sidebar en pantallas grandes */
+@media (min-width: 769px) {
+    #menu-icon {
+        display: none;
+    }
+    .sidebar {
+        left: -250px; /* Asegura que esté oculto por defecto en pantallas grandes */
+    }
+}
+
+/**********  BARRA LATERAL (MENU)  **********/
+#menu-icon { /* Nuevo ID para el icono */
+    cursor: pointer;
+    width: 40px; /* Ajusta el ancho según la imagen */
+    height: auto; /* Mantiene la proporción */
+}
+
+#menu-icon img {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Oculta la barra hacia la izquierda */
+    height: 100%;
+    width: 250px;
+    font-family: "Montserrat";
+    background-color: rgb(34, 34, 34);
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease; /* Animación suave */
+    padding: 60px 15px 15px; /* Espacio adicional en la parte superior */
+    z-index: 1000; /* Asegura que la barra esté por encima del header */
+}
+
+/* Lista dentro de la barra lateral */
+.sidebar h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    border-bottom: 1px solid white;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: inherit; /* Mantiene el mismo color en todos los estados */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/**********  BARRA VERTICAL (NAVEGACION)  **********/
+.barra-vertical {
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+    border-radius: 5px;
+    padding: 5px; /* Reduje el padding general */
+    width: 130px; /* Ajusté el ancho */
+    /* Posicionamiento (ejemplo - puedes ajustarlo según tu layout) */
+    position: absolute;
+    top: 100px; /* Ajusta la posición vertical */
+    left: 20px; /* Ajusta la posición horizontal */
+    z-index: 10; /* Asegura que esté por encima de otros elementos si es necesario */
+}
+
+.barra-vertical button {
+    background-color: transparent;
+    color: #e0e0e0; /* Un gris más claro */
+    border: 1px solid transparent; /* Borde transparente por defecto */
+    padding: 8px 12px; /* Reduje el padding de los botones */
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Transición más rápida */
+    border-radius: 3px;
+    margin-bottom: 3px; /* Reduje el margen entre botones */
+    font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+    /* font-family: 'TuFuente', sans-serif; /* Reemplaza 'TuFuente' con la fuente deseada */
+    position: relative;
+    overflow: hidden;
+}
+
+.barra-vertical button:hover {
+    background-color: #2e2e2e; /* Fondo ligeramente más claro al pasar el ratón */
+}
+
+.barra-vertical .boton-activo {
+    background-color: #222;
+    font-weight: normal; /* Dejé el peso de la fuente normal */
+}
+
+.barra-vertical .boton-activo::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -8px; /* Ajusté la posición del círculo */
+    transform: translateY(-50%);
+    width: 12px; /* Ajusté el tamaño del círculo */
+    height: 12px;
+    background-color: #d4aa70;
+    border-radius: 50%;
+    border: 1px solid #1a1a1a; /* Borde más delgado */
+}

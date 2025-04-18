@@ -1,0 +1,272 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(34, 34, 34);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/********** GRID GENERAL  **********/
+.parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0px;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: red; /* Solo para visualización del grid */
+}
+
+/********** HEADER  **********/
+.div1 {
+    width: 100%;
+    height: 50px;
+    grid-column: span 12 / span 12;
+}
+
+#cont-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(35, 35, 35, 1);
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+#cont-logo {
+    display: flex;
+    align-items: center;
+}
+
+#cont-logo img {
+    max-width: 120px;
+    height: auto;
+}
+
+#buttons a {
+    display: inline-block;
+    padding: 3px 20px;
+    color: rgb(245, 245, 220);
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.2);
+}
+
+#buttons a:hover {
+    color: rgb(34, 34, 34);
+    background-color: rgba(240, 245, 220, 0.8);
+}
+
+/********** EXTENSIONES  **********/
+.div2 {
+    grid-column: span 12 / span 12;
+    display: grid;
+    grid-template-columns: 4fr 4fr 4fr;
+    gap: 20px;
+    width: 100vw;
+    height: 95vh;
+    background-color: transparent;
+    align-items: center;
+    justify-items: center;
+    background-color: rgb(14, 14, 14);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: block;
+    padding: 50px;
+}
+
+#cont-extensions {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background-color: rgba(45, 45, 45, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    height: auto; /* Ajustar altura automáticamente */
+    align-items: center;
+    justify-content: space-between; /* Espacio entre elementos internos */
+    padding-bottom: 15px; /* Espacio para el botón */
+}
+
+#cont-extensions:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+#cont-extensions a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit; /* Heredar el color del contenedor padre */
+    width: 100%; /* Ocupar todo el ancho del contenedor */
+    align-items: center; /* Centrar elementos horizontalmente */
+}
+
+/* IMAGEN EN LOS CONTENEDORES */
+#cont-extensions .image-container {
+    flex-shrink: 0;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    overflow: hidden;
+    display: flex; /* Centrar la imagen */
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Añadir un poco de espacio alrededor de la imagen */
+}
+
+#cont-extensions .image-container img {
+    display: block;
+    width: 60%;
+    height: auto;
+    object-fit: contain; /* Asegurar que la imagen se vea completa */
+}
+
+/* TEXTO EN LOS CONTENEDORES */
+#cont-extensions .text-container {
+    padding: 20px;
+    color: rgb(220, 220, 220);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center; /* Centrar el texto */
+}
+
+#cont-extensions .text-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: rgb(240, 240, 240);
+}
+
+#cont-extensions .text-container p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 15px; /* Espacio antes del precio (si existe) */
+}
+
+#cont-extensions .text-container #price {
+    color: #d4aa70;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+/* BOTONES */
+.extension-btn {
+    background-color: #d4aa70; /* Dorado */
+    color: #1a1a1a; /* Texto oscuro */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espacio entre el texto y el botón */
+    width: 80%; /* Ancho del botón */
+    align-self: center; /* Centrar el botón */
+    margin-bottom: 15px; /* Espacio inferior del botón */
+}
+
+.extension-btn:hover {
+    background-color: #f0c28a; /* Dorado más claro al pasar el ratón */
+}
+
+/* Estilo específico para el botón de comprar */
+.extension-btn.buy-btn {
+    /* Puedes añadir estilos adicionales si lo deseas */
+}
+
+/********** FOOTER  **********/
+.div3 {
+    grid-column: span 12 / span 12;
+    background-color: rgb(34, 34, 34);
+}
+
+#cont-footer {
+    width: 100%;
+    height: 50px;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/********** EXTRAS  **********/
+
+/*
+/* Estilos para celulares (ancho máximo de 768px) */
+/*
+@media (max-width: 768px) {
+    .div2 {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        margin-top: 50px;
+    }
+
+    #cont-extensions {
+        width: 95%;
+        max-height: none;
+        margin: 0 auto 20px auto;
+    }
+}
+*/
+/* Estilos para tabletas (ancho entre 769px y 1024px) */
+/*
+@media (min-width: 769px) and (max-width: 1024px) {
+    .div2 {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        align-items: stretch;
+        margin-top: 50px;
+    }
+
+    #cont-extensions {
+        width: 90%;
+        max-height: none;
+    }
+}
+*/
+
+/* Estilos para escritorios (ancho mínimo de 1025px) */
+/*
+@media (min-width: 1025px) {
+    .div2 {
+        grid-template-columns: 1fr 1fr 1fr;
+        height: 90vh;
+        margin-top: 50px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #cont-extensions {
+        width: 80%;
+        max-height: 75%;
+    }
+}
+*/

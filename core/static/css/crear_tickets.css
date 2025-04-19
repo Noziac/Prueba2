@@ -95,64 +95,79 @@ body {
     height: auto;
 }
 
-#cont-stash {
-    color: #e0e0e0; /* Color de texto general para la sección */
-    padding: 20px; /* Añade un poco de padding alrededor del contenedor principal */
-    width: 100%; /* Asegura que el contenedor de versiones ocupe el ancho disponible */
-}
-
-/* Estilos para la lista de versiones detalladas */
-#cont-stash .version-stash {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsivo para los items de versión */
-    gap: 20px;
-}
-
-#cont-stash .stash-item {
+#cont-createt {
+    margin-top: 8%;
+    margin-bottom: 14%;
+    margin-left: 14%;
     padding: 20px;
-    border-radius: 5px;
-    text-align: center; /* Centra el contenido de cada item */
+    background-color: rgba(34, 34, 34, 0.9); /* Fondo oscuro */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    color: rgb(245, 245, 220); /* Texto claro */
 }
 
-#cont-stash .stash-img img{
-    width: 5%;
+/* Título */
+#cont-createt h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
-#cont-stash .stash-item h3 {
-    color: #f0f0f0;
-    margin-bottom: 10px;
-    font-size: 1.4rem;
-    font-weight: 700; 
+/* Formulario */
+.ticket-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado entre campos */
 }
 
-#cont-stash .stash-item p {
-    line-height: 1.5;
-    font-size: 0.95rem;
-    margin-bottom: 10px;
+/* Grupos de formularios */
+.form-group {
+    display: flex;
+    flex-direction: column;
 }
 
-#cont-stash .stash-item .price {
-    color: #d4aa70;
+label {
     font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
-#cont-stash .stash-item .buy-btn {
-    background-color: #d4aa70; /* Botón dorado */
-    color: #1a1a1a; /* Texto oscuro */
-    border: none;
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid rgb(211, 188, 141); /* Borde claro */
+    border-radius: 5px;
+    background-color: rgb(47, 47, 47); /* Fondo oscuro */
+    color: rgb(245, 245, 220);
+}
+
+textarea {
+    height: 120px; /* Altura del campo de texto */
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgb(150, 150, 150);
+}
+
+/* Botón Enviar */
+.send-ticket-btn {
     padding: 10px 20px;
+    font-size: 1.1rem;
+    background-color: rgb(211, 188, 141);
+    color: rgb(0, 0, 0);
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#cont-stash .stash-item .buy-btn:hover {
-    background-color: #f0c28a; /* Dorado más claro al pasar el ratón */
+.send-ticket-btn:hover {
+    background-color: rgb(245, 245, 220); /* Hover más claro */
+    transform: scale(1.05); /* Efecto de ampliación */
+}
+
+/* Centrar contenido */
+.text-center {
+    text-align: center;
 }
 
 /**********  FOOTER  **********/

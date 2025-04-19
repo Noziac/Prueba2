@@ -1,0 +1,224 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(34, 34, 34);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/**********  GRID GENERAL  **********/
+.parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    background-color: rgb(14, 14, 14);
+    gap: 0px;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    /* height: 100vh; */
+    overflow-x: hidden;
+    /* overflow-y: scroll; */ 
+    /* background-color: red; */
+}
+
+/**********  HEADER  **********/
+.div1 {
+    width: 100%;
+    height: 50px;
+    grid-column: span 12 / span 12;
+}
+
+#cont-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(35, 35, 35, 1);
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+#cont-logo {
+    display: flex;
+    align-items: center;
+}
+
+#cont-logo img {
+    max-width: 120px;
+    height: auto;
+}
+
+#buttons a {
+    display: inline-block;
+    padding: 3px 20px;
+    color: rgb(245, 245, 220);
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.2);
+}
+
+#buttons a:hover {
+    color: rgb(34, 34, 34);
+    background-color: rgba(240, 245, 220, 0.8);
+}
+
+/**********  VERSIONES  **********/
+.div2 {
+    grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
+    padding: 20px;
+    margin-top: 5px; /* Para no quedar debajo del header fijo */
+    display: flex;
+    flex-direction: column; /* Organiza el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    background-color: back;
+    background-size: size;
+    background-repeat: no-repeat;
+    background-position: inherit;
+    width: 100vw;
+    height: auto;
+}
+
+#cont-supp {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 20px auto;
+    width: 80%;
+    color: rgb(245, 245, 220);
+    margin-top: 8%;
+    margin-bottom: 2%;
+}
+
+/* Preguntas Frecuentes */
+.faq h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.faq ul {
+    list-style: none;
+    padding: 0;
+}
+
+.faq li {
+    margin-bottom: 20px;
+    background-color: rgba(34, 34, 34, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.faq li h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.faq li p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Enviar Consulta */
+.query h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.query label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(211, 188, 141);
+    font-size: 1rem;
+    background-color: rgb(34, 34, 34);
+    color: rgb(245, 245, 220);
+    margin-bottom: 15px;
+}
+
+textarea::placeholder {
+    color: rgb(150, 150, 150);
+}
+
+.send-query-btn {
+    background-color: rgb(211, 188, 141);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.send-query-btn:hover {
+    background-color: rgb(245, 245, 220);
+}
+
+/* Botones de Tickets */
+/* Contenedor de los botones */
+#tickets-section {
+    position: flex; /* Fija los botones para que siempre estén en la parte superior derecha */
+    right: 20px; /* Posiciona los botones en la esquina derecha */
+    display: flex; /* Muestra los botones en fila */
+    gap: 15px; /* Espaciado entre los enlaces */
+    padding-bottom: 20px;
+}
+
+/* Enlaces como botones */
+.ticket-link {
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño del texto */
+    color: rgb(245, 245, 220); /* Color claro para el texto */
+    background-color: rgb(34, 34, 34); /* Fondo oscuro */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid rgb(211, 188, 141); /* Borde estilizado */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animaciones suaves */
+}
+
+/* Estilo en hover */
+.ticket-link:hover {
+    background-color: rgb(211, 188, 141); /* Cambia el fondo en hover */
+    color: rgb(0, 0, 0); /* Texto oscuro en hover */
+    transform: scale(1.05); /* Ampliación en hover */
+}
+
+/**********  FOOTER  **********/
+.div3 {
+    grid-column: span 12 / span 12;
+    background-color: rgba(35, 35, 35, 1);
+}
+
+#cont-footer {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(35, 35, 35, 1);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
+}

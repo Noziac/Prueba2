@@ -168,4 +168,5 @@ body {
     color: white;
     text-align: center;
     padding: 10px 0;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
 }

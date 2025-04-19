@@ -95,64 +95,52 @@ body {
     height: auto;
 }
 
-#cont-stash {
-    color: #e0e0e0; /* Color de texto general para la sección */
-    padding: 20px; /* Añade un poco de padding alrededor del contenedor principal */
-    width: 100%; /* Asegura que el contenedor de versiones ocupe el ancho disponible */
+#tickets-container {
+    display: flex;
+    flex-direction: column; /* Muestra los tickets en columna */
+    gap: 20px; /* Espaciado entre tickets */
+    margin-top: 8%;
+    margin-bottom: 5%;
+    padding: 10px;
+    background-color: rgba(34, 34, 34, 0.9); /* Fondo oscuro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilos para la lista de versiones detalladas */
-#cont-stash .version-stash {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsivo para los items de versión */
-    gap: 20px;
+/* Cada ticket */
+.ticket {
+    background-color: rgb(47, 47, 47);
+    color: rgb(245, 245, 220);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Sombra */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaciado interno */
 }
 
-#cont-stash .stash-item {
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center; /* Centra el contenido de cada item */
-}
-
-#cont-stash .stash-img img{
-    width: 5%;
-}
-
-#cont-stash .stash-item h3 {
-    color: #f0f0f0;
-    margin-bottom: 10px;
-    font-size: 1.4rem;
-    font-weight: 700; 
-}
-
-#cont-stash .stash-item p {
-    line-height: 1.5;
-    font-size: 0.95rem;
-    margin-bottom: 10px;
-}
-
-#cont-stash .stash-item .price {
-    color: #d4aa70;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-#cont-stash .stash-item .buy-btn {
-    background-color: #d4aa70; /* Botón dorado */
-    color: #1a1a1a; /* Texto oscuro */
+/* Botón "Ver Ticket" */
+.view-ticket-btn {
+    background-color: rgb(211, 188, 141);
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    font-size: 1rem;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-#cont-stash .stash-item .buy-btn:hover {
-    background-color: #f0c28a; /* Dorado más claro al pasar el ratón */
+.view-ticket-btn:hover {
+    background-color: rgb(245, 245, 220); /* Hover más claro */
+}
+
+/* Título */
+h2.text-center {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: rgb(245, 245, 220);
 }
 
 /**********  FOOTER  **********/

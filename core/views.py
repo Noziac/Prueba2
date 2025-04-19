@@ -13,6 +13,12 @@ def Comprar(request):
 def Soporte(request):
     return render(request, 'core/soporte.html')
 
+def CTickets(request):
+    return render(request, 'core/crear_tickets.html')
+
+def MTickets(request):
+    return render(request, 'core/mis_tickets.html')
+
 def Registrar(request):
     return render(request, 'core/registrar.html')
 

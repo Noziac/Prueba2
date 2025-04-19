@@ -5,7 +5,7 @@ from django.db import models
 # Clase para los usuarios
 class Usuario(models.Model):       #Considerando usar AbastractUser
     TIPOS_USUARIO = [
-        ('cliente', 'Cliente'),
+        ('usuario', 'Usuario'),
         ('administrador', 'Administrador'),
     ]
     id_usuario = models.AutoField(primary_key=True)

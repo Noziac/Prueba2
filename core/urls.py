@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import Principal, Comprar, Soporte, CTickets, MTickets, Registrar, Ingresar, Versiones, Extensiones, Skins, Stash
-
+from django.contrib.auth.views import LoginView, LogoutView
 # path('', , name=""),
 
 urlpatterns = [

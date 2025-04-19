@@ -1,4 +1,6 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # def (request):
 #     return render(request, 'core/.html')
@@ -10,6 +12,7 @@ def Principal(request):
 def Comprar(request):
     return render(request, 'core/comprar.html')
 
+@login_required
 def Soporte(request):
     return render(request, 'core/soporte.html')
 

@@ -216,8 +216,21 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7); /* Añade un fondo para legibilidad */
+    background-image: radial-gradient(circle,rgba(14, 14, 14, 1) 0%, rgba(0, 0, 0, 0) 0%, rgba(14, 14, 14, 1) 100%), url(../img/specs.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
+.spec-group1 {
+    padding-top: 100px;
+    padding-left: 20px;
+}
+
+.spec-group2 {
+    padding-top: 50px;
+    padding-left: 20px;
+}
 #specs h3 {
     width: 100%;
     margin-bottom: 10px;

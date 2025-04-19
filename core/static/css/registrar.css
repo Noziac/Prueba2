@@ -1,0 +1,193 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(34, 34, 34);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/**********  GRID GENERAL  **********/
+.parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    background-color: rgb(14, 14, 14);
+    gap: 0px;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    /* height: 100vh; */
+    overflow-x: hidden;
+    /* overflow-y: scroll; */ 
+    /* background-color: red; */
+}
+
+/**********  HEADER  **********/
+.div1 {
+    width: 100%;
+    height: 50px;
+    grid-column: span 12 / span 12;
+}
+
+#cont-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(35, 35, 35, 1);
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+#cont-logo {
+    display: flex;
+    align-items: center;
+}
+
+#cont-logo img {
+    max-width: 120px;
+    height: auto;
+}
+
+#buttons a {
+    display: inline-block;
+    padding: 3px 20px;
+    color: rgb(245, 245, 220);
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.2);
+}
+
+#buttons a:hover {
+    color: rgb(34, 34, 34);
+    background-color: rgba(240, 245, 220, 0.8);
+}
+
+/**********  VERSIONES  **********/
+.div2 {
+    grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
+    padding: 20px;
+    margin-top: 5px; /* Para no quedar debajo del header fijo */
+    display: flex;
+    flex-direction: column; /* Organiza el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    background-color: back;
+    background-size: size;
+    background-repeat: no-repeat;
+    background-position: inherit;
+    width: 100vw;
+    height: auto;
+}
+
+.cont-register {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3% 0;
+    background-position: center;
+  }
+  
+  /* CONTENEDOR FORMULARIO */
+  .cont-form {
+    width: 100%; /* Ajusta el ancho */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  /* ESTILO FORMULARIO */
+  .form-reg {
+    display: grid; /* Activa CSS Grid */
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+    grid-gap: 15px; /* Espaciado entre columnas y filas */
+    color: rgb(245, 245, 220);
+    justify-content: center;
+    align-items: center;
+}
+  
+  /* LABELS */
+  .form-reg label {
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  /* INPUTS */
+  .form-reg input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(114, 107, 93, 0.8);
+    color: white;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .form-reg input::placeholder {
+    color: #b79dc8;
+  }
+  
+  /* BOTONES */
+  .form-reg button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .form-reg button[type="submit"] {
+    background-color: rgb(211, 188, 141);
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+  }
+  
+  .form-reg button[type="submit"]:hover {
+    background-color: rgb(184, 166, 130);
+  }
+  
+  .form-reg button[type="reset"] {
+    background-color: rgb(228, 230, 207);
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+  }
+  
+  .form-reg button[type="reset"]:hover {
+    background-color: rgb(174, 177, 140);
+  }
+
+/**********  FOOTER  **********/
+.div3 {
+    grid-column: span 12 / span 12;
+    background-color: rgba(35, 35, 35, 1);
+}
+
+#cont-footer {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(35, 35, 35, 1);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
+}

@@ -8,79 +8,78 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/extras.css' %}">
-        <link rel="stylesheet" href="{% static 'css/comprar.css' %}">
-        <title>Escape From Tarkov</title>
+        <link rel="stylesheet" href="{% block page_css %}{% static 'css/comprar.css' %}{% endblock %}">
+        <title>{% block title %}Tienda | Escape From Tarkov{% endblock %}</title>
+        {% block extra_head %}
+        {% endblock %}
     </head>
-        <body>
-            <div class="sidebar" id="cont-menu">
-                <h3>Menú</h3>
-                    <ul>
-                        <li><a href="{% url 'Comprar' %}">Tienda</a></li>
-                        <li><a href="{% url 'Soporte' %}">Soporte</a></li>
-                        <li><a href="{% url 'Registrar' %}">Registrarse</a></li>
-                        <li><a href="{% url 'Ingresar' %}">Iniciar Sesión</a></li>
-                    </ul>
-            </div>
-            <!-- <div id="rotate-message">
-                Por favor, rota tu dispositivo a horizontal para una mejor experiencia.
-                <img src="{% static 'img/rotate_icon.png' %}" alt="Icono de rotación" style="width: 100px; margin-top: 20px;">
-            </div> -->
-            <div class="parent">
-                <header class="div1" id="cont-top">
-                    <div id="menu-icon" onclick="toggleSidebar()">
-                        <img src="{% static 'img/categories.png' %}" alt="Menú" class="img-fluid" style="cursor: pointer;">
-                    </div>
-                    <div id="cont-logo">
-                        <a href="{% url 'Principal' %}">
-                            <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-fluid">
-                        </a>
-                    </div>
+    <body>
+        <div class="sidebar" id="cont-menu">
+            <h3>Menú</h3>
+                <ul>
+                    <li><a href="{% url 'Comprar' %}">Tienda</a></li>
+                    <li><a href="{% url 'Soporte' %}">Soporte</a></li>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'Perfil' %}">Mi Perfil</a>
+                        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                    {% else %}
+                        <a href="{% url 'Registrar' %}">Registrarse</a>
+                        <a href="{% url 'Ingresar' %}">Iniciar Sesión</a>
+                    {% endif %}
+                </ul>
+        </div>
+        <div class="parent">
+            <header class="div1" id="cont-top">
+                <div id="menu-icon" onclick="toggleSidebar()">
+                    <img src="{% static 'img/categories.png' %}" alt="Menú" class="img-fluid" style="cursor: pointer;">
+                </div>
+                <div id="cont-logo">
+                    <a href="{% url 'Principal' %}">
+                        <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-fluid">
+                    </a>
+                </div>
                     <div id="buttons">
                         <a href="https://escapefromtarkov.fandom.com/wiki/Escape_from_Tarkov_Wiki">Wiki</a>
                         <a href="{% url 'Comprar' %}">Tienda</a>
                         <a href="{% url 'Soporte' %}">Soporte</a>
-                        <a href="{% url 'Registrar' %}">Registrarse</a>
-                        <a href="{% url 'Ingresar' %}">Iniciar Sesión</a>
-                        <button type="button" class="btn btn-outline-warning" href="{% url 'Comprar' %}">Tienda</button>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'Perfil' %}">Mi Perfil</a>
+                            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                        {% else %}
+                            <a href="{% url 'Registrar' %}">Registrarse</a>
+                            <a href="{% url 'Ingresar' %}">Iniciar Sesión</a>
+                            <button type="button" class="btn btn-outline-warning" href="{% url 'Comprar' %}">Tienda</button>
+                        {% endif %}
                     </div>
-                </header>
-                    <div class="div2">
-                        <div id="cont-version">
-                            <a href="{% url 'Versiones' %}">
-                                <div class="image-container">
-                                    <img src="{% static 'img/versions.png' %}" alt="Versiones">
-                                </div>
-                                <div id="vertxt" class="text-container">
-                                    <h2>Versiones</h2>
-                                    <p>
-                                        Elige entre 4 versiones diferentes, con precios desde $20.000CLP hasta $125.000 CLP.
-                                        Cada versión incluye un conjunto único de contenido; cuanto mayor sea el precio,
-                                        mayor será la cantidad y calidad de los extras que recibirás, ¡perfecto para adaptar tu experiencia de juego!
-                                    </p>
-                                </div>
-                            </a>
+            </header>
+                <div class="div2">
+                    <div id="cont-block" class="container mt-5">
+                        <h1>Selecciona una Categoría</h1>
+                        <div id="cont-seleccion" class="row">
+                            <div id="boton-selec" class="col-md-6 mb-4">
+                                <a href="{% url 'Versiones' %}" class="btn btn-lg btn-block btn-primary">
+                                    VERSIONES
+                                </a>
+                            </div>
+                            <div id="boton-selec" class="col-md-6 mb-4">
+                                <a href="{% url 'Extensiones' %}" class="btn btn-lg btn-block btn-primary">
+                                    EXTENSIONES
+                                </a>
+                            </div>
                         </div>
-                        <div id="cont-extension">
-                            <a href="{% url 'Extensiones' %}">
-                                <div class="image-container">
-                                    <img src="{% static 'img/extensions.png' %}" alt="Extensiones">
-                                </div>
-                                <div id="exttxt" class="text-container">
-                                    <h2>Extensiones</h2>
-                                    <p>
-                                        Amplía tu experiencia con extensiones únicas: mejora tu inventario con el "stash",
-                                        habilita emocionantes modos PvE, o personaliza completamente tu apariencia dentro del juego.
-                                        ¡Descubre opciones que se ajustan a tu estilo!
-                                    </p>
-                                </div>
-                            </a>
+                        <div class="mt-4 text-center">
+                            {% block product_list %}
+                                {% endblock %}
                         </div>
                     </div>
-                <footer class="div3" id="cont-footer">
-                    ©2025 EFT. TODOS LOS DERECHOS RESERVADOS.
-                </footer>          
-            </div>
-            <script src="main.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>            
-        </body>
+                </div>
+            <footer class="div3" id="cont-footer">
+                ©2025 EFT. TODOS LOS DERECHOS RESERVADOS.
+            </footer>
+        </div>
+        {% block extra_js %}
+        <script src="main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        {% endblock %}
+    </body>
 </html>

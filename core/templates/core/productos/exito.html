@@ -1,0 +1,12 @@
+{% extends '../comprar.html' %}
+
+{% block title %}Compra Exitosa | Escape From Tarkov{% endblock %}
+
+{% block product_list %}
+    <div class="container mt-5">
+        <div class="alert alert-success" role="alert">
+            {{ mensaje }}
+        </div>
+        <a href="{% url 'Extensiones' %}" class="btn btn-primary">Volver a Extensiones</a>
+    </div>
+{% endblock %}

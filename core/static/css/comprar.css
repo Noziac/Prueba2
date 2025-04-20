@@ -16,14 +16,15 @@ body {
 
 /**********  GRID GENERAL  **********/
 .parent {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    display: felx;
+    flex-direction: column;
     gap: 0px;
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-    height: 100vh;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
     overflow-x: hidden;
-    /* overflow-y: scroll; */ /* Permite el scroll vertical en el contenedor principal */
+    overflow-y: scroll;
     background-color: red; /* Solo para visualización del grid */
 }
 
@@ -81,81 +82,103 @@ body {
 /**********  VERSIONES/EXTENSIONES  **********/
 .div2 {
     grid-column: span 12 / span 12;
-    display: grid;
     gap: 20px;
-    padding: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
     width: 100%;
     height: auto;
     background-color: transparent;
     align-items: center;
     justify-items: center;
-    background-image: url(../img/background1.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: block;
+    /*background-color: rgb(14, 14, 14);*/
+
+
+#cont-block {
+    color: rgb(240, 240, 240);
+    text-align: center;
+    margin-bottom: 30px;
+    justify-content: center;
+    width: 100%;
 }
 
-/* CONTENEDORES DE VERSIÓN Y EXTENSIÓN (Estilo común) */
-#cont-version a,
-#cont-extension a {
+#cont-seleccion {
     display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
+}
+
+#boton-selec {
+
+}
+
+  .col-md-6 {
+    display: flex; 
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .col-md-6 a.btn {
+    color: rgb(245, 245, 220);
+    background-color: rgb(153, 135, 102);
+  }
+
+.card {
     background-color: rgba(45, 45, 45, 0.8);
+    color: rgb(220, 220, 220);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%; /* Ocupa toda la altura del grid cell */
-}
-
-/* IMAGEN EN LOS CONTENEDORES */
-#cont-version .image-container,
-#cont-extension .image-container {
-    flex-shrink: 0;
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    height: 100%;
     align-items: center;
     justify-items: center;
 }
 
-#cont-version .image-container img,
-#cont-extension .image-container img {
-    display: block;
-    width: 50%;
-    height: 60%;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card-img-top {
+    width: 75%;
+    height: auto;
+    max-height: 200px;
     object-fit: cover;
 }
 
-/* TEXTO EN LOS CONTENEDORES */
-#cont-version .text-container,
-#cont-extension .text-container {
-    padding: 20px;
-    color: rgb(220, 220, 220);
+.card-body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; 
+    padding: 20px;
     flex-grow: 1;
-    height: 40%;
 }
 
-#cont-version .text-container h2,
-#cont-extension .text-container h2 {
-    font-size: 1.8rem;
+.card-title {
+    font-size: 1.5rem;
     margin-bottom: 10px;
     color: rgb(240, 240, 240);
 }
 
-#cont-version .text-container p,
-#cont-extension .text-container p {
+.card-text {
     font-size: 1rem;
     line-height: 1.5;
+    margin-bottom: 8px;
 }
+
+.fw-bold {
+    color: rgb(240, 240, 240);
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    color: rgb(245, 245, 220);
+    background-color: rgb(153, 135, 102);
+}
+
+.btn-outline-primary:hover {
+    background-color: rgb(0, 123, 255);
+    color: rgb(255, 255, 255);
+}
+
 
 /**********  FOOTER  **********/
 .div3 {
@@ -221,4 +244,5 @@ body {
         width: 80%;
         max-height: 75%;
     }
+    
 }

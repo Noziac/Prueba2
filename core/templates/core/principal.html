@@ -17,8 +17,13 @@
                     <ul>
                         <li><a href="{% url 'Comprar' %}">Tienda</a></li>
                         <li><a href="{% url 'Soporte' %}">Soporte</a></li>
-                        <li><a href="{% url 'Registrar' %}">Registrarse</a></li>
-                        <li><a href="{% url 'Ingresar' %}">Iniciar Sesión</a></li>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'Perfil' %}">Mi Perfil</a>
+                            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                        {% else %}
+                            <a href="{% url 'Registrar' %}">Registrarse</a>
+                            <a href="{% url 'Ingresar' %}">Iniciar Sesión</a>
+                        {% endif %}
                     </ul>
             </div>
             <div class="barra-vertical">
@@ -45,9 +50,14 @@
                         <a href="https://escapefromtarkov.fandom.com/wiki/Escape_from_Tarkov_Wiki">Wiki</a>
                         <a href="{% url 'Comprar' %}">Tienda</a>
                         <a href="{% url 'Soporte' %}">Soporte</a>
-                        <a href="{% url 'Registrar' %}">Registrarse</a>
-                        <a href="{% url 'Ingresar' %}">Iniciar Sesión</a>
-                        <button type="button" class="btn btn-outline-warning" href="{% url 'Comprar' %}">Tienda</button>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'Perfil' %}">Mi Perfil</a>
+                            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                        {% else %}
+                            <a href="{% url 'Registrar' %}">Registrarse</a>
+                            <a href="{% url 'Ingresar' %}">Iniciar Sesión</a>
+                            <button type="button" class="btn btn-outline-warning" href="{% url 'Comprar' %}">Tienda</button>
+                        {% endif %}
                     </div>
                 </header>
                     <div class="div2 scroll-section" id="cont-trailer">

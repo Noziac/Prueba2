@@ -1,0 +1,65 @@
+{% extends '../comprar.html' %}
+{% load static %}
+
+{% block title %}Skins - Tienda | Escape From Tarkov{% endblock %}
+
+{% block product_list %}
+    <div class="container mt-5">
+        <h1>Skins Disponibles</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>USEC</h2>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for skin in usec_skins %}
+                        <div class="col">
+                            <div class="card shadow-sm h-100">
+                                {% if skin.imagen %}
+                                    <img src="{{ skin.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ skin.nombre }}" style="max-height: 200px;">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h5 class="card-title">{{ skin.nombre }}</h5>
+                                    <p class="card-text">{{ skin.descripcion|truncatechars:100 }}</p>
+                                    <p class="card-text">Precio: ${{ skin.precio }}</p>
+                                    <a href="#" class="btn btn-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col">
+                            <p>No hay skins de USEC disponibles en este momento.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>BEAR</h2>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for skin in bear_skins %}
+                        <div class="col">
+                            <div class="card shadow-sm h-100">
+                                {% if skin.imagen %}
+                                    <img src="{{ skin.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ skin.nombre }}" style="max-height: 200px;">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h5 class="card-title">{{ skin.nombre }}</h5>
+                                    <p class="card-text">{{ skin.descripcion|truncatechars:100 }}</p>
+                                    <p class="card-text">Precio: ${{ skin.precio }}</p>
+                                    <a href="#" class="btn btn-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col">
+                            <p>No hay skins de BEAR disponibles en este momento.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'Extensiones' %}" class="btn btn-secondary mt-3">Volver a Extensiones</a>
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/skins.css' %}">
+{% endblock %}

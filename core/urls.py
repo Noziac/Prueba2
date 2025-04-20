@@ -1,18 +1,24 @@
 from django.urls import path
-from .views import Principal, Comprar, Soporte, CTickets, MTickets, Registrar, Ingresar, Versiones, Extensiones, Skins, Stash
+from . import views
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import UserCreationForm
 # path('', , name=""),
 
 urlpatterns = [
-    path('Principal', Principal, name="Principal"),
-    path('Comprar', Comprar, name="Comprar"),
-    path('Soporte', Soporte, name="Soporte"),
-    path('CTickets', CTickets, name="CTickets"),
-    path('MTickets', MTickets, name="MTickets"),
-    path('Registrar', Registrar, name="Registrar"),
-    path('Ingresar', Ingresar, name="Ingresar"),
-    path('Versiones', Versiones, name="Versiones"),
-    path('Extensiones', Extensiones, name="Extensiones"),
-    path('Skins', Skins, name="Skins"),
-    path('Stash', Stash, name="Stash"),
+    path('', views.Principal, name='Principal'),
+    path('comprar/', views.Comprar, name='Comprar'),
+    path('soporte/', views.Soporte, name='Soporte'),
+    path('crear_ticket/', views.CTickets, name='CTickets'),
+    path('mis_tickets/', views.MTickets, name='MTickets'),
+    path('mi_perfil/', views.Perfil, name="Perfil"),
+    path('registrar/', views.Registrar, name='Registrar'),
+    path('ingresar/', LoginView.as_view(template_name='core/ingresar.html'), name='Ingresar'),
+    path('logout/', LogoutView.as_view(next_page='Principal'), name='logout'),
+    path('recuperar_contrasena', views.Recuperar, name="Recuperar"),
+    path('versiones/', views.Versiones, name='Versiones'),
+    path('extensiones/', views.Extensiones, name='Extensiones'),
+    path('extensiones/<str:categoria>/', views.Extensiones, name='extensiones_categoria'),
+    path('skins/', views.Skins, name='Skins'),
+    path('stash/', views.Stash, name='Stash'),
+    path('perfil/', views.Perfil, name='perfil'),
 ]

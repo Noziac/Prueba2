@@ -1,73 +1,87 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+from django.conf import settings
 
 # Create your models here.
 
 # Clase para los usuarios
-class Usuario(models.Model):       #Considerando usar AbastractUser
-    TIPOS_USUARIO = [
-        ('usuario', 'Usuario'),
-        ('administrador', 'Administrador'),
-    ]
-    id_usuario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    contraseña = models.CharField(max_length=20)
-    tipo_usuario = models.CharField(max_length=15, choices=TIPOS_USUARIO, default='cliente')
+class PerfilUsuario(models.Model):
+    usuario = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    rol = models.CharField(max_length=20, choices=settings.ROLES)
+
+    def __str__(self):
+        return self.usuario.username + ' - ' + self.rol
+
+# Modelo Base para Productos (Abstracto)
+class Producto(models.Model):
+    nombre = models.CharField(max_length=100, default='Nombre')
+    descripcion = models.TextField(null=True, blank=True)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        abstract = True
 
     def __str__(self):
         return self.nombre
 
-# Clase para las versiones
-class Version(models.Model):
+# Clase para las Versiones (Hereda de Producto)
+class Version(Producto):
     id_version = models.AutoField(primary_key=True)
-    nombre_version = models.CharField(max_length=50)
-    descripcion = models.TextField(null="True", blank="True")
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
-    caracteristicas = models.TextField(null="True", blank="True")
-    activo = models.BooleanField(default=True) #Para quitar o poner versiones
+    activo = models.BooleanField(default=True)
+    imagen = models.ImageField(upload_to='versiones/', null=True, blank=True)
 
     def __str__(self):
-        return self.nombre_version
-    
-# Clase base para las extensiones (abstracta)    
-class BaseExtension(models.Model):
-    TIPOS_EXTENSION = [
-        ('inventario', 'Agrandar Inventario'),
-        ('skin', 'Skin'),
-        ('pve', 'PvE'),
+        return f"Versión: {self.nombre}"
+
+# Modelo Base para Extensiones (Hereda de Producto, Abstracto)
+class Extension(Producto):
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return f"Extensión: {self.nombre}"
+
+# Subclase para Skins (Hereda de Extension)
+class Skins(Extension):
+    FACTION_CHOICES = [
+        ('bear', 'BEAR'),
+        ('usec', 'USEC'),
     ]
-    nombre_extension = models.CharField(max_length=100)
-    descripcion = models.TextField(null="True", blank="True")
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
+
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField(null=True, blank=True)
+    precio = models.IntegerField()
+    imagen = models.ImageField(upload_to='skins/', null=True, blank=True)
+    facción = models.CharField(
+        max_length=4,
+        choices=FACTION_CHOICES,
+        default='BEAR',  # Puedes establecer un valor por defecto
+    )
 
     class Meta:
-        abstract = True #No genera una tabla en la base de datos
+        verbose_name = "Skins"
+        verbose_name_plural = "Skins"
 
     def __str__(self):
-        return self.nombre_extension
-    
-# Subclase para extensiones de inventario
-class InvExtension(BaseExtension):
-    inv_extra = models.PositiveIntegerField()
+        return f"Skin: {self.nombre} ({self.get_facción_display()})"
+
+# Subclase para PVE (Hereda de Extension)
+class Pve(Extension):
+    pass
+
+    class Meta:
+        verbose_name = "PvE"
+        verbose_name_plural = "PvE"
 
     def __str__(self):
-        return f"{self.nombre_extension} (Inventario)"
-    
-# Subclase para skins BEAR
-class BearSkinExtension(BaseExtension):
-    skin = models.CharField(default= 'BEAR', max_length=25)
+        return f"PvE: {self.nombre}"
+
+# Subclase para Agrandar Alijo (Hereda de Extension)
+class AgrandarAlijo(Extension):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField(null=True, blank=True)
+    precio = models.IntegerField()
+    imagen = models.ImageField(upload_to='alijos/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.nombre_extension} (BEAR)"
-    
-# Subclase para skins USEC
-class UsecSkinExtension(BaseExtension):
-    skin = models.CharField(default= 'USEC', max_length=25)
-
-    def __str__(self):
-        return f"{self.nombre_extension} (USEC)"
-    
-# Subclase para el PVE
-class PveExtension(BaseExtension):
-    def __str__(self):
-        return f"{self.nombre_extension} (BEAR)"
+        return f"Agrandar Alijo: {self.nombre}"

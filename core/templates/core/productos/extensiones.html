@@ -1,0 +1,48 @@
+{% extends '../comprar.html' %}
+{% load static %}
+
+{% block title %}Extensiones - Tienda | Escape From Tarkov{% endblock %}
+
+{% block product_list %}
+    <div class="container mt-5">
+        <h1>Extensiones Disponibles</h1>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+            <div class="col">
+                <div class="card shadow-sm h-100 text-center">
+                    <img src="{{ skin_imagen }}" class="card-img-top object-fit-cover" alt="Skins" style="max-height: 200px;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title">Skins</h5>
+                        <p class="card-text">{{ skin_descripcion|truncatechars:100 }}</p>
+                        <a href="{% url 'extensiones_categoria' categoria='skins' %}" class="btn btn-primary">Ver Skins</a>
+                    </div>
+                </div>
+            </div>
+
+            </tr>
+            <div class="col">
+                <div class="card shadow-sm h-100 text-center">
+                    <img src="{{ pve_imagen }}" class="card-img-top object-fit-cover" alt="PvE" style="max-height: 200px;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title">PvE</h5>
+                        <p class="card-text">{{ pve_descripcion|truncatechars:100 }}</p>
+                        <form method="post" action="{% url 'extensiones_categoria' categoria='comprar_pve' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Comprar PvE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow-sm h-100 text-center">
+                    <img src="{{ alijo_imagen }}" class="card-img-top object-fit-cover" alt="Agrandar Alijo" style="max-height: 200px;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title">Agrandar Alijo</h5>
+                        <p class="card-text">{{ alijo_descripcion|truncatechars:100 }}</p>
+                        <a href="{% url 'extensiones_categoria' categoria='stash' %}" class="btn btn-primary">Ver Alijos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

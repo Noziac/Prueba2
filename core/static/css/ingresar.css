@@ -81,117 +81,96 @@ body {
 
 /**********  VERSIONES  **********/
 .div2 {
-    grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
-    padding: 20px;
-    margin-top: 5px; /* Para no quedar debajo del header fijo */
-    display: flex;
-    flex-direction: column; /* Organiza el contenido verticalmente */
-    align-items: center; /* Centra el contenido horizontalmente */
-    background-color: back;
-    background-size: size;
-    background-repeat: no-repeat;
-    background-position: inherit;
-    width: 100vw;
-    height: auto;
+  grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
+  padding: 20px;
+  margin-top: 5px; /* Para no quedar debajo del header fijo */
+  display: flex;
+  flex-direction: column; /* Organiza el contenido verticalmente */
+  align-items: center; /* Centra el contenido horizontalmente */
+  justify-items: center;
+  background-color: back;
+  background-size: size;
+  background-repeat: no-repeat;
+  background-position: inherit;
+  width: 100vw;
+  height: auto;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
-.cont-login {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3% 0;
-    background-position: center;
-  }
-  
-  /* CONTENEDOR FORMULARIO */
-  .cont-form {
-    width: 350px; /* Ajusta el ancho */
-    background-color: rgb(34, 34, 34, 0.8);
-    border-radius: 10px;
-    padding: 20px;
-    color: rgb(245, 245, 220);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-  }
-  
-  /* ESTILO FORMULARIO */
-  .form-log {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    color: white;
-  }
-  
-  /* LABELS */
-  .form-log label {
-    text-align: left;
-    font-weight: bold;
-    font-size: 14px;
-  }
-  
-  /* INPUTS */
-  .form-log input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgba(114, 107, 93, 0.8);
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-    outline: none;
-  }
-  
-  .form-log input::placeholder {
-    color: #b79dc8;
-  }
-  
-  /* BOTON */
-  .form-log button {
-    margin-top: 15px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .form-log button[type="login"] {
-    background-color: rgb(211, 188, 141);
-    color: rgba(0, 0, 0, 0.8);
-    font-weight: bold;
-  }
-  
-  .form-log button[type="login"]:hover {
-    background-color: rgb(184, 166, 130);
-  }
-
-#cont-admin {
-    height: calc(100vh - 100px); /* Ajusta según la altura de la barra superior */
+/* CONTENEDOR FORMULARIO */
+.cont-form {
+  width: 50%; /* Ajusta el ancho */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  margin-top: 50px;
 }
 
-.admin-content {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    width: 100%;
+/* ESTILO FORMULARIO */
+.form-reg {
+  display: grid; /* Activa CSS Grid */
+  color: rgb(245, 245, 220);
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
 }
 
-h2 {
-    margin-bottom: 20px;
+/* LABELS */
+.form-reg label {
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 1rem;
+/* INPUTS */
+.form-reg input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(114, 107, 93, 0.8);
+  color: white;
+  font-size: 16px;
+  outline: none;
 }
 
-button:hover {
-    transform: scale(1.05);
-    transition: all 0.3s ease;
+.form-reg input::placeholder {
+  color: #b79dc8;
 }
+
+/* BOTONES */
+.form-reg button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-reg button[type="submit"] {
+  background-color: rgb(211, 188, 141);
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+}
+
+.form-reg button[type="submit"]:hover {
+  background-color: rgb(184, 166, 130);
+}
+
+.form-reg button[type="reset"] {
+  background-color: rgb(228, 230, 207);
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+}
+
+.form-reg button[type="reset"]:hover {
+  background-color: rgb(174, 177, 140);
+}
+ 
 
 /**********  FOOTER  **********/
 .div3 {

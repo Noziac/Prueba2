@@ -103,3 +103,4 @@ document.addEventListener('DOMContentLoaded', function() {
     checkFooterVisibility();
     window.addEventListener('scroll', checkFooterVisibility);
 });
+

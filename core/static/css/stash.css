@@ -1,172 +1,88 @@
-/* Estilos generales */
-* {
+/* GENERALES */
+.card.shadow-sm.h-100 {
+    width: 320px;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: rgb(34, 34, 34);
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/**********  GRID GENERAL  **********/
-.parent {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    background-color: rgb(14, 14, 14);
-    gap: 0px;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    /* height: 100vh; */
-    overflow-x: hidden;
-    /* overflow-y: scroll; */ 
-    /* background-color: red; */
-}
-
-/**********  HEADER  **********/
-.div1 {
-    width: 100%;
-    height: 50px;
-    grid-column: span 12 / span 12;
-}
-
-#cont-top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: rgba(35, 35, 35, 1);
-    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
-    z-index: 999;
-    display: flex;
-    justify-content: space-between;
+    padding-bottom: 50px;
     align-items: center;
-    padding: 0 20px;
+    justify-self: center;
+    color: rgb(245, 245, 220);  
+    background-color: rgba(34, 34, 34, 0.5);
 }
 
-#cont-logo {
-    display: flex;
+/* IMAGEN */
+.card-img-top.object-fit-cover {
+    width: 200px;
+    height: 50%;
+}
+
+/* TEXTO */
+.card-body.d-flex.flex-column.justify-content-between {
+    margin: 0;
+    padding: 0;
+    height: 70%;
     align-items: center;
+    justify-content: center;
 }
 
-#cont-logo img {
-    max-width: 120px;
-    height: auto;
-}
-
-#buttons a {
-    display: inline-block;
-    padding: 3px 20px;
-    color: rgb(245, 245, 220);
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
-    box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.2);
-}
-
-#buttons a:hover {
+/* BOTON */
+.btn-outline-btn-primary-1 {
+    width: 150px;
+    align-self: center;
     color: rgb(34, 34, 34);
-    background-color: rgba(240, 245, 220, 0.8);
+    background-color: rgb(154, 136, 102);
 }
 
-/**********  VERSIONES  **********/
-.div2 {
-    grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
-    padding: 20px;
-    margin-top: 5px; /* Para no quedar debajo del header fijo */
-    display: flex;
-    flex-direction: column; /* Organiza el contenido verticalmente */
-    align-items: center; /* Centra el contenido horizontalmente */
-    background-color: back;
-    background-size: size;
-    background-repeat: no-repeat;
-    background-position: inherit;
-    width: 100vw;
-    height: auto;
+.btn-outline-btn-primary-1:hover {
+    color: rgb(34, 34, 34);
+    background-color: rgb(154, 136, 102);
 }
 
-#cont-stash {
-    color: #e0e0e0; /* Color de texto general para la sección */
-    padding: 20px; /* Añade un poco de padding alrededor del contenedor principal */
-    width: 100%; /* Asegura que el contenedor de versiones ocupe el ancho disponible */
+/**********  EXTRAS  **********/
+@media (max-width: 600px) {
+    .div2 {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        margin-top: 50px;
+    }
+
+    /* VERSIONES */
+    .card-img-top.object-fit-cover {
+        width: 200px;
+        height: auto;
+    }
+
+    .div3 {
+        height: 60px;
+    }
 }
 
-/* Estilos para la lista de versiones detalladas */
-#cont-stash .version-stash {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsivo para los items de versión */
-    gap: 20px;
+@media (min-width: 600px) and (max-width: 768px) {
+    .div2 {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        align-items: stretch;
+        margin-top: 50px;
+    }
+
+    /* VERSIONES */
+    .card-img-top.object-fit-cover {
+        width: 200px;
+        height: auto;
+    }
 }
 
-#cont-stash .stash-item {
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center; /* Centra el contenido de cada item */
-}
+/* Estilos para escritorios (ancho mínimo de 1025px) */
+@media (min-width: 992px) {
+    .div2 {
+        margin-top: 50px;
+        align-items: stretch;
+        justify-content: center;
+        grid-template-columns: 1fr;
+    }
 
-#cont-stash .stash-img img{
-    width: 5%;
-}
-
-#cont-stash .stash-item h3 {
-    color: #f0f0f0;
-    margin-bottom: 10px;
-    font-size: 1.4rem;
-    font-weight: 700; 
-}
-
-#cont-stash .stash-item p {
-    line-height: 1.5;
-    font-size: 0.95rem;
-    margin-bottom: 10px;
-}
-
-#cont-stash .stash-item .price {
-    color: #d4aa70;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-#cont-stash .stash-item .buy-btn {
-    background-color: #d4aa70; /* Botón dorado */
-    color: #1a1a1a; /* Texto oscuro */
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-#cont-stash .stash-item .buy-btn:hover {
-    background-color: #f0c28a; /* Dorado más claro al pasar el ratón */
-}
-
-/**********  FOOTER  **********/
-.div3 {
-    grid-column: span 12 / span 12;
-    background-color: rgba(35, 35, 35, 1);
-}
-
-#cont-footer {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(35, 35, 35, 1);
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
+    .card-img-top.object-fit-cover {
+        width: 250px;
+        height: auto;
+    }
 }

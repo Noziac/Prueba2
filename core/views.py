@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Version, Skins, Pve, AgrandarAlijo
 from django.templatetags.static import static
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 def Principal(request):
     return render(request, 'core/principal.html')
@@ -66,7 +68,7 @@ def Recuperar(request):
     return render(request, 'core/recuperar.html')
 
 def Versiones(request):
-    versiones_lista = Version.objects.filter(activo=True).order_by('precio')
+    versiones_lista = Version.objects.filter(activo=True).order_by('-precio')
     return render(request, 'core/productos/versiones.html', {'versiones': versiones_lista})
 
 def Extensiones(request, categoria=None):
@@ -79,7 +81,6 @@ def Extensiones(request, categoria=None):
         })
     elif categoria == 'comprar_pve':
         if request.method == 'POST':
-            # Lógica para realizar la compra de PvE
             mensaje = "¡Compra de PvE realizada con éxito!"
             return render(request, 'core/productos/exito.html', {'mensaje': mensaje})
         else:
@@ -88,7 +89,6 @@ def Extensiones(request, categoria=None):
         alijos = AgrandarAlijo.objects.all()
         return render(request, 'core/productos/stash.html', {'alijos': alijos})
     else:
-        # Mostrar la página principal de Extensiones
         skin_representativo = Skins.objects.first()
         pve_representativo = Pve.objects.first()
         alijo_representativo = AgrandarAlijo.objects.first()

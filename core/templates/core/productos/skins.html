@@ -1,6 +1,9 @@
 {% extends '../comprar.html' %}
 {% load static %}
 
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'css/skins.css' %}">
+{% endblock %}
 {% block title %}Skins - Tienda | Escape From Tarkov{% endblock %}
 
 {% block product_list %}
@@ -14,13 +17,13 @@
                         <div class="col">
                             <div class="card shadow-sm h-100">
                                 {% if skin.imagen %}
-                                    <img src="{{ skin.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ skin.nombre }}" style="max-height: 200px;">
+                                    <img src="{{ skin.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ skin.nombre }}">
                                 {% endif %}
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <h5 class="card-title">{{ skin.nombre }}</h5>
                                     <p class="card-text">{{ skin.descripcion|truncatechars:100 }}</p>
                                     <p class="card-text">Precio: ${{ skin.precio }}</p>
-                                    <a href="#" class="btn btn-primary">Ver Detalles</a>
+                                    <button type="submit" class="btn btn-outline-btn-primary-1">Comprar</button>
                                 </div>
                             </div>
                         </div>
@@ -38,13 +41,13 @@
                         <div class="col">
                             <div class="card shadow-sm h-100">
                                 {% if skin.imagen %}
-                                    <img src="{{ skin.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ skin.nombre }}" style="max-height: 200px;">
+                                    <img src="{{ skin.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ skin.nombre }}">
                                 {% endif %}
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <h5 class="card-title">{{ skin.nombre }}</h5>
                                     <p class="card-text">{{ skin.descripcion|truncatechars:100 }}</p>
                                     <p class="card-text">Precio: ${{ skin.precio }}</p>
-                                    <a href="#" class="btn btn-primary">Ver Detalles</a>
+                                    <button type="submit" class="btn btn-outline-btn-primary-1">Comprar</button>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +59,6 @@
                 </div>
             </div>
         </div>
-        <a href="{% url 'Extensiones' %}" class="btn btn-secondary mt-3">Volver a Extensiones</a>
     </div>
 {% endblock %}
 

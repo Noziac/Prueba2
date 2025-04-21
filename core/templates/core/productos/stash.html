@@ -1,6 +1,9 @@
 {% extends '../comprar.html' %}
 {% load static %}
 
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'css/stash.css' %}">
+{% endblock %}
 {% block title %}Agrandar Alijo - Tienda | Escape From Tarkov{% endblock %}
 
 {% block product_list %}
@@ -12,15 +15,15 @@
                     <div class="card shadow-sm h-100">
                         <div class="stash-img">
                             {% if alijo.imagen %}
-                                <img src="{{ alijo.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ alijo.nombre }}" style="max-height: 150px;">
+                                <img src="{{ alijo.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ alijo.nombre }}"">
                             {% else %}
-                                <img src="{% static 'img/stash_default.png' %}" class="card-img-top object-fit-cover" alt="Alijo por Defecto" style="max-height: 150px;">
+                                <img src="{% static 'img/stash_default.png' %}" class="card-img-top object-fit-cover" alt="Alijo por Defecto"">
                             {% endif %}
                         </div>
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ alijo.nombre }}</h5>
                             <p class="card-text">{{ alijo.descripcion }}</p>  <p class="card-text">Precio: ${{ alijo.precio }}</p>
-                            <button class="buy-btn" onclick="/* Aquí iría la lógica para comprar {{ alijo.nombre }} */">Comprar</button>
+                            <button type="submit" class="btn btn-outline-btn-primary-1">Comprar</button>
                         </div>
                     </div>
                 </div>
@@ -30,7 +33,6 @@
                 </div>
             {% endfor %}
         </div>
-        <a href="{% url 'Extensiones' %}" class="btn btn-secondary mt-3">Volver a Extensiones</a>
     </div>
 {% endblock %}
 

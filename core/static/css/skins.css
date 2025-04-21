@@ -1,7 +1,7 @@
 /* GENERALES */
 .card.shadow-sm.h-100 {
     width: 320px;
-    height: 350px;
+    height: auto;
     margin: 0;
     padding: 0;
     padding-bottom: 50px;
@@ -13,17 +13,17 @@
 
 /* IMAGEN */
 .card-img-top.object-fit-cover {
-    width: 200px;
-    height: 50%;
+    width: 174px;
+    height: 150px;
 }
 
 /* TEXTO */
 .card-body.d-flex.flex-column.justify-content-between {
     margin: 0;
-    padding: 0;
-    height: 70%;
+    padding: 10px;
+    height: auto;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 /* BOTON */
@@ -47,18 +47,29 @@
         margin-top: 50px;
     }
 
-    /* VERSIONES */
     .card-img-top.object-fit-cover {
-        width: 200px;
+        width: 150px;
         height: auto;
     }
 
     .div3 {
         height: 60px;
     }
+    .card.shadow-sm.h-100 {
+        width: 180px;
+        min-height: 200px;
+        max-height: 700px;
+        margin: 0;
+        padding: 0;
+        padding-bottom: 50px;
+        align-items: center;
+        justify-self: center;
+        color: rgb(245, 245, 220);  
+        background-color: rgba(0, 0, 0, 0.0);
+    }
 }
 
-@media (min-width: 600px) and (max-width: 768px) {
+@media (min-width: 600px) and (max-width: 992px) {
     .div2 {
         grid-template-columns: 1fr 1fr;
         height: auto;
@@ -66,10 +77,22 @@
         margin-top: 50px;
     }
 
-    /* VERSIONES */
     .card-img-top.object-fit-cover {
-        width: 200px;
+        width: 150px;
         height: auto;
+    }
+
+    .card.shadow-sm.h-100 {
+        width: 180px;
+        min-height: 200px;
+        max-height: 700px;
+        margin: 0;
+        padding: 0;
+        padding-bottom: 50px;
+        align-items: center;
+        justify-self: center;
+        color: rgb(245, 245, 220);  
+        background-color: rgba(0, 0, 0, 0.0);
     }
 }
 
@@ -83,7 +106,20 @@
     }
 
     .card-img-top.object-fit-cover {
-        width: 250px;
+        width: 160px;
         height: auto;
+    }
+
+    .card.shadow-sm.h-100 {
+        width: 180px;
+        min-height: 200px;
+        max-height: 700px;
+        margin: 0;
+        padding: 0;
+        padding-bottom: 50px;
+        align-items: center;
+        justify-self: center;
+        color: rgb(245, 245, 220);  
+        background-color: rgba(0, 0, 0, 0.0);
     }
 }

@@ -12,7 +12,7 @@ urlpatterns = [
     path('mis_tickets/', views.MTickets, name='MTickets'),
     path('mi_perfil/', views.Perfil, name="Perfil"),
     path('registrar/', views.Registrar, name='Registrar'),
-    path('ingresar/', LoginView.as_view(template_name='core/ingresar.html'), name='Ingresar'),
+    path('login/', LoginView.as_view(template_name='core/ingresar.html'), name='Ingresar'),
     path('logout/', LogoutView.as_view(next_page='Principal'), name='logout'),
     path('recuperar_contrasena', views.Recuperar, name="Recuperar"),
     path('versiones/', views.Versiones, name='Versiones'),

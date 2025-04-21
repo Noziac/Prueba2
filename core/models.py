@@ -8,6 +8,7 @@ from django.conf import settings
 class PerfilUsuario(models.Model):
     usuario = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     rol = models.CharField(max_length=20, choices=settings.ROLES)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
     def __str__(self):
         return self.usuario.username + ' - ' + self.rol

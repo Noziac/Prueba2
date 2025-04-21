@@ -70,37 +70,3 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("No se encontró el contenedor principal para el scroll snapping.");
     }
 });
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const footer = document.getElementById('cont-footer');
-    const body = document.body;
-    const html = document.documentElement;
-
-    function checkFooterVisibility() {
-        const windowHeight = window.innerHeight;
-        const bodyHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        const scrollPosition = window.scrollY || window.pageYOffset;
-
-        // Si la posición del scroll + la altura de la ventana es igual o mayor que la altura total del documento,
-        // el usuario ha llegado al final.
-        if (scrollPosition + windowHeight >= bodyHeight) {
-            footer.style.position = 'relative'; // El footer vuelve a su flujo normal
-            footer.style.bottom = 'auto';
-        } else {
-            footer.style.position = 'fixed'; // El footer se mantiene fijo en la parte inferior
-            footer.style.bottom = '0';
-        }
-    }
-
-    // Ejecutar la función al cargar la página y cada vez que se haga scroll
-    checkFooterVisibility();
-    window.addEventListener('scroll', checkFooterVisibility);
-});
-

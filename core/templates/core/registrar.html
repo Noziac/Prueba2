@@ -1,70 +1,106 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/extras.css' %}">
-        <link rel="stylesheet" href="{% static 'css/registrar.css' %}">
-        <title>Escape From Tarkov</title>
-    </head>
-        <body>
-            <div class="sidebar" id="cont-menu">
-                <h3>Menú</h3>
-                    <ul>
-                        <li><a href="{% url 'Comprar' %}">Tienda</a></li>
-                        <li><a href="{% url 'Soporte' %}">Soporte</a></li>
-                        <li><a href="{% url 'Ingresar' %}">Iniciar Sesión</a></li>
-                    </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/extras.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registrar.css' %}">
+    {% block page_css %}
+    {% endblock %}
+    <title>Escape From Tarkov</title>
+</head>
+<body>
+    <div class="sidebar" id="cont-menu">
+        <h3>Menú</h3>
+        <ul>
+            <li><button type="button" class="btn btn-outline-btn-primary" href="{% url 'Comprar' %}">Tienda</button></li>
+            <li><button type="button" class="btn btn-outline-btn-primary" href="{% url 'Soporte' %}">Soporte</button></li>
+            {% if user.is_authenticated %}
+                <li><button type="button" class="btn btn-outline-btn-primary" href="{% url 'Perfil' %}">Mi Perfil</button></li>
+                <li><button type="button" class="btn btn-outline-btn-primary" href="{% url 'logout' %}">Cerrar Sesión</button></li>
+            {% else %}
+                <li><button type="button" class="btn btn-outline-btn-primary" href="{% url 'Ingresar' %}">Iniciar Sesión</button></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="parent">
+        <header class="div1" id="cont-top">
+            <div id="menu-icon" onclick="toggleSidebar()">
+                <img src="{% static 'img/categories.png' %}" alt="Menú" class="img-fluid" style="cursor: pointer;">
             </div>
-            <!-- <div id="rotate-message">
-                Por favor, rota tu dispositivo a horizontal para una mejor experiencia.
-                <img src="{% static 'img/rotate_icon.png' %}" alt="Icono de rotación" style="width: 100px; margin-top: 20px;">
-            </div> -->
-            <div class="parent">
-                <header class="div1" id="cont-top">
-                    <div id="menu-icon" onclick="toggleSidebar()">
-                        <img src="{% static 'img/categories.png' %}" alt="Menú" class="img-fluid" style="cursor: pointer;">
-                    </div>
-                    <div id="cont-logo">
-                        <a href="{% url 'Principal' %}">
-                            <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-fluid">
-                        </a>
-                    </div>
-                    <div id="buttons">
-                        <a href="https://escapefromtarkov.fandom.com/wiki/Escape_from_Tarkov_Wiki">Wiki</a>
-                        <a href="{% url 'Comprar' %}">Tienda</a>
-                        <a href="{% url 'Soporte' %}">Soporte</a>
-                        <a href="{% url 'Ingresar' %}">Iniciar Sesión</a>
-                        <button type="button" class="btn btn-outline-warning" href="{% url 'Comprar' %}">Tienda</button>
-                    </div>
-                </header>
-                    <div class="div2">
-                        <div class="cont-register">
-                            <div class="cont-form">
-                                <h2>Registro</h2>
-                                <form id="form" class="form-reg" method="post">
-                                    {% csrf_token %}
-                                    {% if form.errors %}
-                                        <p style="color: red;">Por favor, corrige los siguientes errores:</p>
-                                        {{ form.as_p }}
-                                    {% else %}
-                                        {{ form.as_p }}
-                                    {% endif %}
-                                    <button type="submit" class="btn btn-succes">Registrarse</button>
-                                    <a href="{% url 'Ingresar' %}" class="btn btn-link">¿Ya tienes cuenta? Inicia sesión</a>
-                                </form>
+            <div id="cont-logo">
+                <a href="{% url 'Principal' %}">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-fluid">
+                </a>
+            </div>
+            <div id="buttons">
+                <a href="https://escapefromtarkov.fandom.com/wiki/Escape_from_Tarkov_Wiki" class="btn btn-outline-btn-primary">Wiki</a>
+                <a href="{% url 'Comprar' %}" class="btn btn-outline-btn-primary">Tienda</a>
+                <a href="{% url 'Soporte' %}" class="btn btn-outline-btn-primary">Soporte</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'Perfil' %}" class="btn btn-outline-btn-primary">Mi Perfil</a>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-btn-primary">Cerrar Sesión</a>
+                {% else %}
+                    <a href="{% url 'Ingresar' %}" class="btn btn-outline-btn-primary">Iniciar Sesión</a>
+                {% endif %}
+            </div>
+        </header>
+        <div class="div2">
+            <div class="cont-register">
+                <div class="cont-form">
+                    <h2>Registro</h2>
+                        <form id="form" class="form-reg" method="post" action="{% url 'Registrar' %}">
+                            {% csrf_token %}
+                            {% if errores %}
+                                <div style="color: red;">
+                                    {% for campo, mensaje in errores.items %}
+                                        <p>{{ mensaje }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Nombre de Usuario:</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ username|default:'' }}">
+                                {% if errores.username %}
+                                    <div class="form-text text-danger">{{ errores.username }}</div>
+                                {% endif %}
                             </div>
-                        </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo Electrónico:</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ email|default:'' }}">
+                                {% if errores.email %}
+                                    <div class="form-text text-danger">{{ errores.email }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                                {% if errores.password %}
+                                    <div class="form-text text-danger">{{ errores.password }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="password2" class="form-label">Repetir Contraseña:</label>
+                                <input type="password" class="form-control" id="password2" name="password2">
+                                {% if errores.password2 %}
+                                    <div class="form-text text-danger">{{ errores.password2 }}</div>
+                                {% endif %}
+                            </div>
+                            <button type="submit" class="btn btn-succes">Registrarse</button>
+                            <a href="{% url 'Ingresar' %}" class="btn btn-link">¿Ya tienes cuenta? Inicia sesión</a>
+                        </form>
                     </div>
-                <footer class="div3" id="cont-footer">
-                    ©2025 EFT. TODOS LOS DERECHOS RESERVADOS.
-                </footer>          
+                </div>
             </div>
-            <script src="{% static 'js/main.js' %}"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>            
-        </body>
+        <footer class="div3" id="cont-footer">
+            ©2025 EFT. TODOS LOS DERECHOS RESERVADOS.
+        </footer>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -23,7 +23,7 @@ body {
     scroll-behavior: smooth; /* Opcional: scroll suave */
     height: 100vh; /* Asegura que el contenedor principal ocupe toda la altura */
     overflow-x: hidden; /* Oculta el scroll horizontal innecesario */
-    background-color: red;
+    background-color: rgb( 14, 14, 14);
 }
  
 /**********  HEADER  **********/
@@ -164,8 +164,8 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Negro semitransparente */
-    z-index: 2; /* Encima de los videos (z-index de .carousel-inner suele ser 0) */
-    pointer-events: none; /* Permite interacción con los videos */
+    z-index: 2; 
+    pointer-events: none;
 }
 
 .carousel-item {
@@ -197,114 +197,32 @@ body {
 /********** SPECS  **********/
 .div4 {
     grid-column: span 12 / span 12;
+    background-color: rgb(34, 34, 34);
 }
 
-#specs {
+#cont-twitch {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7); /* Añade un fondo para legibilidad */
-    background-image: radial-gradient(circle,rgba(14, 14, 14, 1) 0%, rgba(0, 0, 0, 0) 0%, rgba(14, 14, 14, 1) 100%), url(../img/specs.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
-.spec-group1 {
-    padding-top: 100px;
-    padding-left: 20px;
-}
-
-.spec-group2 {
-    padding-top: 50px;
-    padding-left: 20px;
-}
-#specs h3 {
-    width: 100%;
-    margin-bottom: 10px;
-    text-align: left;
-    color: white;
-    border-bottom: 1px solid white; /* Añade un separador */
-    padding-bottom: 5px;
-}
-
-#specs ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-    color: white;
-}
-
-#specs li {
-    margin-bottom: 5px; /* Reduce el espacio entre elementos */
-    font-size: 0.9rem; /* Ajusta el tamaño del texto */
-}
-
-/**********  CREADORES  **********/
-.div5 {
-    grid-column: span 12 / span 12;
-    background-image: url(../img/cont.jpg);
-}
-
-#cont-creators {
-    width: 100vh;
-    height: 100vh;
-    display: flex; /* Para mostrar uno o dos streamers lado a lado */
-    justify-content: center; /* Centrar horizontalmente si solo hay uno o espacio entre dos */
-    align-items: center; /* Centrar verticalmente */
-    padding: 20px;
-    /* Otros estilos de fondo si los tienes */
-}
-
-.creator-block {
-    display: flex; /* Para alinear imagen, info e icono */
     align-items: center;
-    margin: 10px 20px; /* Espacio entre bloques de streamers */
-    background-color: rgba(0, 0, 0, 0.7); /* Fondo para legibilidad */
-    padding: 15px;
-    border-radius: 8px;
-    position: relative; /* Para posicionar el icono de Twitch */
+    justify-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/twitch_bg3.jpg");
+    background-size:auto;
 }
 
-.creator-info {
-    display: flex;
-    align-items: center;
+#cont-twitch h2 {
+    color: rgb(245, 245, 220);
+    padding-top: 125px;
 }
 
-.creator-info img {
-    width: 50px; /* Ajusta el tamaño de la imagen */
-    height: 50px;
-    border-radius: 50%; /* Imagen circular */
-    margin-right: 10px;
+#cont-twitch h3 {
+    color: rgb(245, 245, 220);
 }
 
-.creator-info h3 {
-    color: white;
-    margin-bottom: 5px;
+#cont-twitch p {
+    color: rgb(245, 245, 220);
 }
-
-.creator-info p {
-    color: #ccc;
-    font-size: 0.9em;
-}
-
-.twitch-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 40px; /* Ajusta el tamaño del icono */
-    height: auto;
-}
-
-.twitch-icon img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
 /**********  FOOTER  **********/
-.div6 {
+.div5 {
     grid-column: span 12 / span 12;
     background-color: rgb(34, 34, 34);
 }
@@ -312,14 +230,15 @@ body {
 #cont-footer {
     width: 100%;
     height: 50px;
-    background-color: #222;
+    background-color: rgb(34, 34, 34);
     color: rgb(245, 245, 220);
     text-align: center;
     padding: 10px 0;
     box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
+    bottom: 0;
 }
         
 /**********  EXTRAS  **********/
 .scroll-section {
-    scroll-snap-align: center; /* Centra las secciones en el scroll snap */
+    scroll-snap-align: center;
 }

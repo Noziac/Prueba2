@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import UserCreationForm
 # path('', , name=""),
 
 urlpatterns = [
@@ -21,4 +20,5 @@ urlpatterns = [
     path('skins/', views.Skins, name='Skins'),
     path('stash/', views.Stash, name='Stash'),
     path('perfil/', views.Perfil, name='perfil'),
+    path('exito/', views.exito, name='exito'),
 ]

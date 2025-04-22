@@ -42,6 +42,7 @@
         grid-template-columns: 1fr;
         align-items: stretch;
         margin-top: 50px;
+        margin-bottom: 50px;
     }
 
     /* VERSIONES */
@@ -55,7 +56,7 @@
     }
 }
 
-@media (min-width: 600px) and (max-width: 768px) {
+@media (min-width: 600px) and (max-width: 992px) {
     .div2 {
         grid-template-columns: 1fr 1fr;
         height: auto;
@@ -71,16 +72,17 @@
 }
 
 /* Estilos para escritorios (ancho mínimo de 1025px) */
-/*@media (min-width: 992px) {
+@media (min-width: 992px) {
     .div2 {
         margin-top: 50px;
         align-items: stretch;
         justify-content: center;
         grid-template-columns: 1fr;
+        margin-bottom: 50px;
     }
 
     .card-img-top.object-fit-cover {
         width: 400px;
         height: auto;
     }
-}   */
+} 

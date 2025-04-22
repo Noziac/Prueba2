@@ -149,8 +149,8 @@
                     <div class="div4 scroll-section">
                         <div id="cont-twitch">
                             {% if random_streamer %}
-                                <h2>¡Descubre a tu nuevo streamer favorito!</h2>
-                                <h3>¡Mira a {{ random_streamer.username }} en vivo!</h3>
+                                <h2>¡Gaming, Risas y Comunidad: Descubre Nuestros Streamers!</h2>
+                                <h3>¡Mira a {{ random_streamer.username }} en vivo por Twitch!</h3>
                                 <iframe
                                     src="https://player.twitch.tv/?channel={{ random_streamer.username }}&parent=127.0.0.1"
                                     height="500"
@@ -159,10 +159,6 @@
                                     scrolling="no"
                                     allowfullscreen="true">
                                 </iframe>
-                                {% if random_streamer.stream_info %}
-                                    <p class="stream-title">{{ random_streamer.stream_info.title }}</p>
-                                    <p class="game-name">Jugando: {{ random_streamer.stream_info.game_name }}</p>
-                                {% endif %}
                             </div>
                         {% elif all_streamers %}
                             <p>No hay streamers de Tarkov configurados en este momento.</p>

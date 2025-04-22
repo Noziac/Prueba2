@@ -2,19 +2,19 @@ import requests
 import os
 import random
 from dotenv import load_dotenv
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .models import Version, Skins, Pve, AgrandarAlijo, PerfilUsuario
+from .models import Version, Skins, Pve, AgrandarAlijo, PerfilUsuario, Ticket, Version
 from django.templatetags.static import static
 from django.urls import reverse
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from .forms import EditarPerfilForm, EditarAvatarForm
-from django.contrib.auth import update_session_auth_hash
 from django.db import IntegrityError
 from django.contrib.auth.models import User
+from .forms import CrearTicketForm
+
 
 load_dotenv()
 
@@ -41,11 +41,22 @@ def Soporte(request):
 
 @login_required
 def CTickets(request):
-    return render(request, 'core/crear_tickets.html')
+    if request.method == 'POST':
+        form = CrearTicketForm(request.POST)
+        if form.is_valid():
+            nuevo_ticket = form.save(commit=False)
+            nuevo_ticket.usuario = request.user
+            nuevo_ticket.save()
+            messages.success(request, 'Ticket creado exitosamente. Te responderemos a la brevedad.')
+            return redirect('MTickets')  # Redirige a la lista de tickets
+    else:
+        form = CrearTicketForm()
+    return render(request, 'core/crear_tickets.html', {'form': form})
 
 @login_required
 def MTickets(request):
-    return render(request, 'core/mis_tickets.html')
+    tickets = Ticket.objects.filter(usuario=request.user).order_by('-fecha_creacion')
+    return render(request, 'core/mis_tickets.html', {'tickets': tickets})
 
 @login_required
 def Perfil(request):
@@ -130,7 +141,6 @@ def Registrar(request):
                 return render(request, 'core/registrar.html', {'errores': errores, 'username': username, 'email': email})
     else:
         return render(request, 'core/registrar.html')
-
     
 def Ingresar(request):
     if request.method == 'POST':
@@ -158,7 +168,37 @@ def Recuperar(request):
 
 def Versiones(request):
     versiones_lista = Version.objects.filter(activo=True).order_by('-precio')
+
+    if request.method == 'POST':
+        version_id = request.POST.get('version_id')
+        if version_id:
+            try:
+                version = get_object_or_404(Version, pk=version_id, activo=True)
+                compra_realizada = request.session.get(f'comprado_version_{version_id}', False)
+
+                if compra_realizada:
+                    messages.warning(request, f'Ya compraste la versión "{version.nombre}".')
+                else:
+                    Compra.objects.create(usuario=request.user, version=version)
+                    messages.success(request, f'¡Compra exitosa de la versión "{version.nombre}"!')
+                    request.session[f'comprado_version_{version_id}'] = True
+                    # Redirigir a una página GET (la página de éxito)
+                    return redirect('exito')
+            except Version.DoesNotExist:
+                messages.error(request, 'La versión seleccionada no existe.')
+        else:
+            messages.error(request, 'No se especificó la versión a comprar.')
+
     return render(request, 'core/productos/versiones.html', {'versiones': versiones_lista})
+
+def exito(request):
+    mensaje = "¡Compra exitosa! Gracias por tu compra."
+    return render(request, 'core/exito.html', {'mensaje': mensaje})
+
+def exito(request):
+    mensaje = "¡Compra exitosa! Gracias por tu compra."
+    return render(request, 'core/exito.html', {'mensaje': mensaje})
+
 
 def Extensiones(request, categoria=None):
     if categoria == 'skins':
@@ -192,10 +232,9 @@ def Extensiones(request, categoria=None):
             'pve_url_compra': reverse('extensiones_categoria', kwargs={'categoria': 'comprar_pve'}),
         })
 
-@login_required
+
 def Stash(request):
     return render(request, 'core/productos/stash.html')
-
 
 # TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH 
 def obtener_info_twitch(request, usernames):

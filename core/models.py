@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -86,3 +87,26 @@ class AgrandarAlijo(Extension):
 
     def __str__(self):
         return f"Agrandar Alijo: {self.nombre}"
+    
+class Ticket(models.Model):
+    ESTADOS = (
+        ('abierto', 'Abierto'),
+        ('en_progreso', 'En Progreso'),
+        ('cerrado', 'Cerrado'),
+    )
+
+    prioridades = (
+        ('baja', 'Baja'),
+        ('media', 'Media'),
+        ('alta', 'Alta'),
+    )
+
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    asunto = models.CharField(max_length=200)
+    mensaje = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='abierto')
+    prioridad = models.CharField(max_length=10, choices=prioridades, default='media')
+
+    def __str__(self):
+        return f"Ticket #{self.id} - {self.asunto} ({self.usuario.username})"

@@ -1,5 +1,6 @@
 {% extends '../comprar.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block page_css %}
     <link rel="stylesheet" href="{% static 'css/versiones.css' %}">
@@ -8,6 +9,13 @@
 
 {% block product_list %}
     <div class="container mt-5">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 g-2">
             {% for version in versiones %}
                 <div class="col">
@@ -18,10 +26,13 @@
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ version.nombre }}</h5>
                             <p class="card-text">{{ version.descripcion|truncatechars:100 }}</p>
-                            {% load humanize %}
                             <p class="card-text fw-bold">${{ version.precio|intcomma }} CLP</p>
                             <div class="d-grid gap-2">
-                                <button class="btn btn-outline-btn-primary" type="button">Comprar</button>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="version_id" value="{{ version.id_version }}">
+                                    <button class="btn btn-outline-btn-primary" type="submit">Comprar</button>
+                                </form>
                             </div>
                         </div>
                     </div>

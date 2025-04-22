@@ -44,9 +44,9 @@
         grid-template-columns: 1fr;
         align-items: stretch;
         margin-top: 50px;
+        margin-bottom: 50px;
     }
 
-    /* VERSIONES */
     .card-img-top.object-fit-cover {
         width: 200px;
         height: auto;
@@ -63,9 +63,9 @@
         height: auto;
         align-items: stretch;
         margin-top: 50px;
+        margin-bottom: 50px;
     }
 
-    /* VERSIONES */
     .card-img-top.object-fit-cover {
         width: 200px;
         height: auto;

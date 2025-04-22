@@ -11,6 +11,7 @@ body {
     background-attachment: fixed; /* Mantiene el fondo fijo durante el scroll */
     background-position: center;  /* Centra la imagen de fondo */
     background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    overflow-y: hidden;
 }
 
 /* GRID GENERAL */
@@ -19,7 +20,6 @@ body {
     grid-template-columns: repeat(12, 1fr);
     gap: 0px;
     scroll-snap-type: y mandatory; /* Activa el scroll snap vertical */
-    overflow-y: scroll; /* Permite el scroll vertical */
     scroll-behavior: smooth; /* Opcional: scroll suave */
     height: 100vh; /* Asegura que el contenedor principal ocupe toda la altura */
     overflow-x: hidden; /* Oculta el scroll horizontal innecesario */
@@ -205,7 +205,7 @@ body {
     height: 100vh;
     align-items: center;
     justify-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/twitch_bg3.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../img/bg_twitch.png");
     background-size:auto;
 }
 
@@ -241,4 +241,39 @@ body {
 /**********  EXTRAS  **********/
 .scroll-section {
     scroll-snap-align: center;
+}
+
+@media (max-width: 600px) {
+    
+}
+
+@media (min-width: 600px) and (max-width: 992px) {
+    #cont-twitch iframe {
+        width: 100%;
+        height: 50%;
+        align-items: center;
+        justify-items: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/bg_twitch.png");
+        background-size:auto;
+    }
+
+    #cont-twitch h2 {
+        color: rgb(245, 245, 220);
+        padding-top: 50px;
+    }    
+}
+
+/* Estilos para escritorios (ancho mínimo de 1025px) */
+@media (min-width: 992px) {
+    #cont-twitch {
+        width: 100vw;
+        height: 100vh;
+        color: rgb(245, 245, 220);
+        margin-bottom: 100px; 
+    }    
+
+    #cont-twitch h2 {
+        color: rgb(245, 245, 220);
+        padding-top: 60px; 
+    }    
 }

@@ -6,26 +6,23 @@
 }
 
 body {
-    background-color: rgb(34, 34, 34);
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
+    font-family: Montserrat;
+    background-color: rgb(14, 14, 14);
 }
 
 /**********  GRID GENERAL  **********/
 .parent {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    background-color: rgb(14, 14, 14);
+    display: felx;
+    flex-direction: column;
     gap: 0px;
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-    /* height: 100vh; */
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
     overflow-x: hidden;
-    /* overflow-y: scroll; */ 
-    /* background-color: red; */
+    overflow-y: hidden;
+    font-family: Montserrat;
+    /*background-color: red; */
 }
 
 /**********  HEADER  **********/
@@ -60,10 +57,10 @@ body {
     height: auto;
 }
 
-#buttons a {
+/* BOTONES CONTENEDOR TOP*/
+.btn-outline-btn-primary {
     display: inline-block;
     padding: 3px 20px;
-    color: rgb(245, 245, 220);
     text-decoration: none;
     border-radius: 5px;
     text-align: center;
@@ -71,22 +68,25 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left: 10px;
+    color: rgb(154, 136, 102);
+    border-color: rgb(154, 136, 102);
+    background-color: rgb(34, 34, 34);
     box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.2);
 }
 
-#buttons a:hover {
+.btn-outline-btn-primary:hover {
     color: rgb(34, 34, 34);
-    background-color: rgba(240, 245, 220, 0.8);
+    background-color: rgb(154, 136, 102);
 }
 
 /**********  VERSIONES  **********/
 .div2 {
-    grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
+    grid-column: span 12 / span 12;
     padding: 20px;
-    margin-top: 5px; /* Para no quedar debajo del header fijo */
+    margin-top: 5px;
     display: flex;
-    flex-direction: column; /* Organiza el contenido verticalmente */
-    align-items: center; /* Centra el contenido horizontalmente */
+    flex-direction: column; 
+    align-items: center; 
     background-color: back;
     background-size: size;
     background-repeat: no-repeat;
@@ -95,11 +95,12 @@ body {
     height: auto;
 }
 
-#cont-createt {
+#cont-crear-ticket {
     margin-top: 8%;
     margin-bottom: 14%;
-    margin-left: 14%;
+    width: 45%;
     padding: 20px;
+    justify-items: center;
     background-color: rgba(34, 34, 34, 0.9); /* Fondo oscuro */
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
@@ -107,7 +108,7 @@ body {
 }
 
 /* Título */
-#cont-createt h2 {
+#cont-crear-ticket h2 {
     font-size: 2rem;
     margin-bottom: 20px;
 }
@@ -149,25 +150,39 @@ input::placeholder, textarea::placeholder {
 }
 
 /* Botón Enviar */
-.send-ticket-btn {
-    padding: 10px 20px;
-    font-size: 1.1rem;
+.btn-custom-primary {
     background-color: rgb(211, 188, 141);
-    color: rgb(0, 0, 0);
-    border: none;
+    color: white;
+    border: 1px solid rgb(211, 188, 141);
+    padding: 10px 20px;
     border-radius: 5px;
+    text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.send-ticket-btn:hover {
-    background-color: rgb(245, 245, 220); /* Hover más claro */
-    transform: scale(1.05); /* Efecto de ampliación */
+.btn-custom-primary:hover {
+    background-color: rgb(154, 136, 102);
+    border-color: rgb(154, 136, 102);
 }
 
-/* Centrar contenido */
-.text-center {
-    text-align: center;
+.btn-custom-secondary {
+    background-color: #6c757d; /* Un gris secundario */
+    color: white;
+    border: 1px solid #6c757d;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 10px; /* Opcional: para separarlos un poco */
+}
+
+.btn-custom-secondary:hover {
+    background-color: #545b62;
+    border-color: #545b62;
 }
 
 /**********  FOOTER  **********/

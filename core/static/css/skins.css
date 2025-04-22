@@ -45,6 +45,7 @@
         grid-template-columns: 1fr;
         align-items: stretch;
         margin-top: 50px;
+        margin-bottom: 50px;
     }
 
     .card-img-top.object-fit-cover {
@@ -75,6 +76,7 @@
         height: auto;
         align-items: stretch;
         margin-top: 50px;
+        margin-bottom: 50px;
     }
 
     .card-img-top.object-fit-cover {
@@ -103,6 +105,7 @@
         align-items: stretch;
         justify-content: center;
         grid-template-columns: 1fr;
+        margin-bottom: 50px;
     }
 
     .card-img-top.object-fit-cover {

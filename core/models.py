@@ -57,7 +57,7 @@ class Skins(Extension):
     facción = models.CharField(
         max_length=4,
         choices=FACTION_CHOICES,
-        default='BEAR',  # Puedes establecer un valor por defecto
+        default='BEAR',
     )
 
     class Meta:

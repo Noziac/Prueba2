@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'core',
+    'rest_framework',
+    'rest_api',
 ]
 
 LOGIN_REDIRECT_URL = '/'

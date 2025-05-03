@@ -19,18 +19,9 @@ from .forms import CrearTicketForm
 load_dotenv()
 
 def Principal(request):
-    tarkov_streamers_usernames = ['pestily', 'lvndmark', 'baxbeast', 'drlupo', 'willerz']
-    all_streamers_data = obtener_info_twitch(request, tarkov_streamers_usernames)
+    return render(request, 'core/principal.html')
 
-    live_tarkov_streamers = [s for s in all_streamers_data if s['is_live']]
-    random_live_streamer = random.choice(live_tarkov_streamers) if live_tarkov_streamers else None
-
-    context = {
-        'random_streamer': random_live_streamer,
-        'all_streamers': all_streamers_data,
-    }
-    return render(request, 'core/principal.html', context)
-
+@login_required
 def Comprar(request):
     versiones_lista = Version.objects.filter(activo=True).order_by('-precio')
     return render(request, 'core/productos/versiones.html', {'versiones': versiones_lista})
@@ -235,63 +226,3 @@ def Extensiones(request, categoria=None):
 
 def Stash(request):
     return render(request, 'core/productos/stash.html')
-
-# TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH TWITCH 
-def obtener_info_twitch(request, usernames):
-    client_id = os.environ.get('TWITCH_CLIENT_ID')
-    client_secret = os.environ.get('TWITCH_CLIENT_SECRET')
-
-    if not client_id or not client_secret:
-        print("¡ERROR! No se encontraron las variables de entorno de Twitch.")
-        return []
-
-    auth_params = {
-        'client_id': client_id,
-        'client_secret': client_secret,
-        'grant_type': 'client_credentials'
-    }
-    auth_url = 'https://id.twitch.tv/oauth2/token'
-    auth_response = requests.post(auth_url, params=auth_params)
-    auth_response.raise_for_status()
-    access_token = auth_response.json().get('access_token')
-
-    if not access_token:
-        print("¡ERROR! No se pudo obtener el token de acceso de Twitch.")
-        return []
-
-    headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Client-Id': client_id
-    }
-
-    streamer_info = []
-    for username in usernames:
-        user_url = f'https://api.twitch.tv/helix/users?login={username}'
-        user_response = requests.get(user_url, headers=headers)
-        user_response.raise_for_status()
-        user_data = user_response.json().get('data')
-        user_id = user_data[0].get('id') if user_data else None
-
-        if user_id:
-            stream_url = f'https://api.twitch.tv/helix/streams?user_id={user_id}'
-            stream_response = requests.get(stream_url, headers=headers)
-            stream_response.raise_for_status()
-            stream_data = stream_response.json().get('data')
-            is_live = len(stream_data) > 0
-            stream_info = stream_data[0] if is_live else None
-
-            streamer_info.append({
-                'username': username,
-                'is_live': is_live,
-                'stream_info': stream_info,
-                'user_info': user_data[0] if user_data else None
-            })
-        else:
-            streamer_info.append({
-                'username': username,
-                'is_live': False,
-                'stream_info': None,
-                'user_info': None
-            })
-
-    return streamer_info

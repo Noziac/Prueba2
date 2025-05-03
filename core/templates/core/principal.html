@@ -27,10 +27,7 @@
                         {% endif %}
                     </ul>
             </div>
-            <div id="rotate-message">
-                Por favor, rota tu dispositivo a horizontal para una mejor experiencia.
-                <img src="{% static 'img/rotate_icon.png' %}" alt="Icono de rotación" style="width: 100px; margin-top: 20px;">
-            </div>
+
             <div class="parent">
                 <header class="div1" id="cont-top">
                     <div id="menu-icon" onclick="toggleSidebar()">
@@ -54,10 +51,7 @@
                             {% endif %}
                         </div>
                 </header>
-                    <div class="div2 scroll-section" id="cont-trailer">
-                        <iframe src="https://www.youtube.com/embed/IPlnHe9l34E?si=0Rjjdb1UNWj8CMcs?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allowfullscreen muted></iframe>
-                    </div>
-                    <div class="div3 scroll-section">
+                    <div class="div2" id="cont-carousel">
                         <div class="row">
                             <div class="col-12">
                                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
@@ -146,31 +140,129 @@
                             </div>
                         </div>
                     </div>
-                    <div class="div4 scroll-section">
-                        <div id="cont-twitch">
-                            {% if random_streamer %}
-                                <h2>¡Gaming, Risas y Comunidad: Descubre Nuestros Streamers!</h2>
-                                <h3>¡Mira a {{ random_streamer.username }} en vivo por Twitch!</h3>
-                                <iframe
-                                    src="https://player.twitch.tv/?channel={{ random_streamer.username }}&parent=127.0.0.1"
-                                    height="500"
-                                    width="900"
-                                    frameborder="0"
-                                    scrolling="no"
-                                    allowfullscreen="true">
-                                </iframe>
+                    <div class="div3" id="cont-trailer">
+                        <iframe src="https://www.youtube.com/embed/IPlnHe9l34E?si=0Rjjdb1UNWj8CMcs?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allowfullscreen muted></iframe>
+                    </div>
+                    <div class="div4" id="cont-specs_faq">
+                        <div class="requisitos">
+                            <h2>Requisitos Mínimos</h2>
+                            <ul>
+                                <li><strong>Sistema Operativo:</strong> Windows 10/11 (64 Bit)</li>
+                                <li><strong>Procesador:</strong> Intel Core i5 (3.2 GHz) / AMD Ryzen 5 3600 (3.2 GHz)</li>
+                                <li><strong>RAM:</strong> 16 GB DDR4 2666 MT/s</li>
+                                <li><strong>Tarjeta Gráfica:</strong> NVIDIA GeForce RTX 2060 super (8GB) / AMD Radeon RX 5700 XT (8GB)</li>
+                                <li><strong>Espacio en Disco:</strong> 60 GB SSD (SATA3)</li>
+                            </ul>
+                            <h2>Requisitos Recomendados</h2>
+                            <ul>
+                                <li><strong>Sistema Operativo:</strong> Windows 10/11 (64 Bit)</li>
+                                <li><strong>Procesador:</strong> Intel Core i7 13700K (5.4 GHz) / Ryzen 7 7800X3D (5.0 GHz) o superior</li>
+                                <li><strong>RAM:</strong> 32 GB DDR4 3200 MT/s o superior</li>
+                                <li><strong>Tarjeta Gráfica:</strong> NVIDIA GeForce RTX 3060 (12GB) / AMD RX 6600 XT (8GB) o superior</li>
+                                <li><strong>Espacio en Disco:</strong> 60 GB SSD (M.2 NVMe)</li>
+                            </ul>
+                        </div>
+                        <div class="accordion" id="faqAccordion">
+                            <h2>Preguntas Frecuentes</h2>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        ¿Puedo jugar si mi sistema es ligeramente inferior a los requisitos mínimos?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Es posible que puedas ejecutar el juego con configuraciones bajas, pero la experiencia podría no ser óptima y podrías experimentar problemas de rendimiento como bajo framerate o stuttering. No se garantiza una experiencia fluida.
+                                    </div>
+                                </div>
                             </div>
-                        {% elif all_streamers %}
-                            <p>No hay streamers de Tarkov configurados en este momento.</p>
-                        {% else %}
-                            <p>No se pudieron cargar los streamers.</p>
-                        {% endif %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        ¿Es necesario tener Windows de 64 bits?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Sí, Escape from Tarkov solo es compatible con sistemas operativos de 64 bits. Asegúrate de tener una versión de 64 bits de Windows instalada.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        ¿Es necesario el uso de conexión a internet para jugar?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Sí, se requiere una conexión a internet estable para jugar Escape from Tarkov. Actualmente, el juego no ofrece un modo para un solo jugador y todas las interacciones se realizan en línea con otros jugadores.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        ¿Realmente necesito una tarjeta gráfica dedicada?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Sí, se requiere una tarjeta gráfica dedicada con al menos 8 GB de VRAM para cumplir con los requisitos mínimos. Las tarjetas gráficas integradas en la CPU generalmente no son suficientes para ejecutar el juego de manera adecuada.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        ¿Tener un SSD realmente hace la diferencia?</button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Si, se recomienda encarecidamente instalar el juego en un SSD (unidad de estado sólido). Esto puede reducir significativamente los tiempos de carga y mejorar la fluidez general del juego.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                <footer class="div5 scroll-section" id="cont-footer">
+                    <div class="div5" id="cont-info">
+                        <div class="carrusel-mapas" id="mapas">
+                            <h2>Mapas</h2>
+                            <div id="mapasCarousel" class="carousel slide">
+                                <div class="carousel-inner" id="mapasCarouselInner">
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#mapasCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#mapasCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div6">
+                        <h2>Flea Market</h2>
+                        <input type="text" id="searchInput" placeholder="Buscar item...">
+                        <table class="flea-market-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Item</th>
+                                    <th>Precio Promedio (24h)</th>
+                                    <th>Precio Más Bajo (24h)</th>
+                                    <th>Precio Más Alto (24h)</th>
+                                    <th>Última Oferta</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fleaMarketBody">
+                                </tbody>
+                        </table>
+                    </div>
+                <footer class="div7" id="cont-footer">
                     ©2025 EFT. TODOS LOS DERECHOS RESERVADOS.
-                </footer>          
-            </div>
+                </footer>        
+            </div>     
             <script src="{% static 'js/main.js' %}"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>            
         </body>

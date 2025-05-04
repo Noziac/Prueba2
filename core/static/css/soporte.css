@@ -81,12 +81,12 @@ body {
 
 /**********  VERSIONES  **********/
 .div2 {
-    grid-column: span 12 / span 12; /* Ocupa la mayor parte del ancho */
+    grid-column: span 12 / span 12;
     padding: 20px;
-    margin-top: 5px; /* Para no quedar debajo del header fijo */
+    margin-top: 5px; 
     display: flex;
-    flex-direction: column; /* Organiza el contenido verticalmente */
-    align-items: center; /* Centra el contenido horizontalmente */
+    flex-direction: column; 
+    align-items: center;
     background-color: back;
     background-size: size;
     background-repeat: no-repeat;
@@ -181,45 +181,46 @@ textarea::placeholder {
 /* Botones de Tickets */
 /* Contenedor de los botones */
 #tickets-section {
-    position: flex; /* Fija los botones para que siempre estén en la parte superior derecha */
-    right: 20px; /* Posiciona los botones en la esquina derecha */
-    display: flex; /* Muestra los botones en fila */
-    gap: 15px; /* Espaciado entre los enlaces */
+    position: flex; 
+    right: 20px; 
+    display: flex; 
+    gap: 15px; 
     padding-bottom: 20px;
 }
 
 /* Enlaces como botones */
 .ticket-link {
-    padding: 10px 20px; /* Espaciado interno */
-    font-size: 1rem; /* Tamaño del texto */
-    color: rgb(245, 245, 220); /* Color claro para el texto */
-    background-color: rgb(34, 34, 34); /* Fondo oscuro */
-    text-decoration: none; /* Sin subrayado */
-    border-radius: 5px; /* Bordes redondeados */
-    border: 1px solid rgb(211, 188, 141); /* Borde estilizado */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Animaciones suaves */
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: rgb(245, 245, 220); 
+    background-color: rgb(34, 34, 34); 
+    text-decoration: none; 
+    border-radius: 5px; 
+    border: 1px solid rgb(211, 188, 141); 
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 /* Estilo en hover */
 .ticket-link:hover {
-    background-color: rgb(211, 188, 141); /* Cambia el fondo en hover */
-    color: rgb(0, 0, 0); /* Texto oscuro en hover */
-    transform: scale(1.05); /* Ampliación en hover */
+    background-color: rgb(211, 188, 141); 
+    color: rgb(0, 0, 0); 
+    transform: scale(1.05);
 }
 
 /**********  FOOTER  **********/
 .div3 {
     grid-column: span 12 / span 12;
-    background-color: rgba(35, 35, 35, 1);
+    background-color: rgb(34, 34, 34);
 }
 
 #cont-footer {
     width: 100%;
-    height: 50px;
+    height: 40px;
     margin-top: 50px;
-    background-color: rgba(35, 35, 35, 1);
-    color: white;
+    background-color: rgb(34, 34, 34);
+    color: rgb(245, 245, 220);
     text-align: center;
     padding: 10px 0;
     box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
+    bottom: 0;
 }

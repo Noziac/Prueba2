@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import PerfilUsuario
-from .models import Ticket
+from .models import PerfilUsuario, Ticket
 
 class EditarPerfilForm(forms.ModelForm):
     class Meta:
@@ -17,3 +16,7 @@ class CrearTicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ['asunto', 'mensaje', 'prioridad']
+
+class ComprarProductoForm(forms.Form):
+    content_type = forms.CharField(widget=forms.HiddenInput())
+    object_id = forms.IntegerField(widget=forms.HiddenInput())

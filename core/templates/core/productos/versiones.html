@@ -30,7 +30,9 @@
                             <div class="d-grid gap-2">
                                 <form method="post">
                                     {% csrf_token %}
-                                    <input type="hidden" name="version_id" value="{{ version.id_version }}">
+                                    {{ form_compra }}
+                                    <input type="hidden" name="content_type" value="version">
+                                    <input type="hidden" name="object_id" value="{{ version.id_version }}">
                                     <button class="btn btn-outline-btn-primary" type="submit">Comprar</button>
                                 </form>
                             </div>

@@ -6,14 +6,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .models import Version, Skins, Pve, AgrandarAlijo, PerfilUsuario, Ticket, Version
+from .models import Version, Skins, Pve, AgrandarAlijo, PerfilUsuario, Ticket, Version, Compra  
 from django.templatetags.static import static
 from django.urls import reverse
 from django.contrib import messages
-from .forms import EditarPerfilForm, EditarAvatarForm
+from .forms import EditarPerfilForm, EditarAvatarForm, CrearTicketForm, ComprarProductoForm
 from django.db import IntegrityError
 from django.contrib.auth.models import User
-from .forms import CrearTicketForm
+from django.contrib.contenttypes.models import ContentType
 
 
 load_dotenv()
@@ -56,7 +56,9 @@ def Perfil(request):
 
     info_form = EditarPerfilForm(instance=request.user)
     password_form = PasswordChangeForm(request.user)
-    avatar_form = EditarAvatarForm(instance=request.user.perfilusuario)
+    avatar_form = EditarAvatarForm(instance=request.user.perfil)
+
+    compras = Compra.objects.filter(usuario=request.user)
 
     if request.method == 'POST':
         if 'actualizar_info' in request.POST:
@@ -83,6 +85,7 @@ def Perfil(request):
         'form_info': info_form,
         'form_password': password_form,
         'form_avatar': avatar_form,
+        'compras': compras,
     }
     return render(request, 'core/perfil.html', context)
 
@@ -116,7 +119,10 @@ def Registrar(request):
         else:
             try:
                 user = User.objects.create_user(username=username, email=email, password=password)
-                PerfilUsuario.objects.create(usuario=user)
+                perfil_usuario = PerfilUsuario(usuario=user)
+                perfil_usuario.email = user.email
+                perfil_usuario.contrasenna = password
+                perfil_usuario.save()
                 login(request, user)
                 return redirect('Principal')
             except IntegrityError as e:
@@ -157,57 +163,103 @@ def Ingresar(request):
 def Recuperar(request):
     return render(request, 'core/recuperar.html')
 
+@login_required
 def Versiones(request):
     versiones_lista = Version.objects.filter(activo=True).order_by('-precio')
+    form = ComprarProductoForm()  # Inicializa el formulario
 
     if request.method == 'POST':
-        version_id = request.POST.get('version_id')
-        if version_id:
+        form = ComprarProductoForm(request.POST)
+        if form.is_valid():
+            version_id = form.cleaned_data['object_id']
+            content_type_str = form.cleaned_data['content_type']
             try:
                 version = get_object_or_404(Version, pk=version_id, activo=True)
-                compra_realizada = request.session.get(f'comprado_version_{version_id}', False)
-
-                if compra_realizada:
-                    messages.warning(request, f'Ya compraste la versión "{version.nombre}".')
-                else:
-                    Compra.objects.create(usuario=request.user, version=version)
+                content_type = ContentType.objects.get(model=content_type_str)
+                # Verificar si ya existe una compra para este usuario y producto
+                if not Compra.objects.filter(usuario=request.user, content_type=content_type, object_id=version.id_version).exists():
+                    Compra.objects.create(usuario=request.user, content_type=content_type, object_id=version.id_version)
                     messages.success(request, f'¡Compra exitosa de la versión "{version.nombre}"!')
-                    request.session[f'comprado_version_{version_id}'] = True
-                    # Redirigir a una página GET (la página de éxito)
                     return redirect('exito')
+                else:
+                    messages.warning(request, f'Ya compraste la versión "{version.nombre}".')
+                    return redirect('Versiones') # Redirige a la misma página para mostrar el mensaje
             except Version.DoesNotExist:
                 messages.error(request, 'La versión seleccionada no existe.')
+            except ContentType.DoesNotExist:
+                messages.error(request, 'Tipo de contenido inválido.')
         else:
-            messages.error(request, 'No se especificó la versión a comprar.')
+            messages.error(request, 'Error en el formulario de compra.')
 
-    return render(request, 'core/productos/versiones.html', {'versiones': versiones_lista})
-
-def exito(request):
-    mensaje = "¡Compra exitosa! Gracias por tu compra."
-    return render(request, 'core/exito.html', {'mensaje': mensaje})
+    return render(request, 'core/productos/versiones.html', {'versiones': versiones_lista, 'form_compra': form})
 
 def exito(request):
     mensaje = "¡Compra exitosa! Gracias por tu compra."
-    return render(request, 'core/exito.html', {'mensaje': mensaje})
+    return render(request, 'core/productos/exito.html', {'mensaje': mensaje})
 
-
+@login_required
 def Extensiones(request, categoria=None):
+    form = ComprarProductoForm()
+
+    if request.method == 'POST':
+        form = ComprarProductoForm(request.POST)
+        if form.is_valid():
+            object_id = form.cleaned_data['object_id']
+            content_type_str = form.cleaned_data['content_type']
+            try:
+                content_type = ContentType.objects.get(model=content_type_str)
+                model_class = content_type.model_class()
+                producto = get_object_or_404(model_class, pk=object_id)
+
+                if not Compra.objects.filter(usuario=request.user, content_type=content_type, object_id=object_id).exists():
+                    Compra.objects.create(usuario=request.user, content_type=content_type, object_id=object_id)
+                    messages.success(request, f'¡Compra exitosa de {producto.nombre if hasattr(producto, "nombre") else content_type.name}!')
+                    return redirect('exito')
+                else:
+                    messages.warning(request, f'Ya compraste {producto.nombre if hasattr(producto, "nombre") else content_type.name}.')
+                    return redirect('extensiones_categoria', categoria=categoria)
+            except ContentType.DoesNotExist:
+                messages.error(request, 'Tipo de contenido inválido.')
+            except model_class.DoesNotExist:
+                messages.error(request, 'El producto seleccionado no existe.')
+        else:
+            messages.error(request, 'Error en el formulario de compra.')
+
     if categoria == 'skins':
         usec_skins = Skins.objects.filter(facción='usec')
         bear_skins = Skins.objects.filter(facción='bear')
         return render(request, 'core/productos/skins.html', {
             'bear_skins': bear_skins,
             'usec_skins': usec_skins,
+            'form_compra': form,
         })
     elif categoria == 'comprar_pve':
-        if request.method == 'POST':
-            mensaje = "¡Compra de PvE realizada con éxito!"
-            return render(request, 'core/productos/exito.html', {'mensaje': mensaje})
+        pve = Pve.objects.first()
+        if pve:
+            content_type = ContentType.objects.get_for_model(Pve)
+            if not Compra.objects.filter(usuario=request.user, content_type=content_type, object_id=pve.id).exists():
+                Compra.objects.create(usuario=request.user, content_type=content_type, object_id=pve.id)
+                messages.success(request, "¡Compra de PvE realizada con éxito!")
+                return redirect('exito')
+            else:
+                messages.warning(request, "Ya compraste el acceso a PvE.")
+                skin_representativo = Skins.objects.first()
+                pve_representativo = Pve.objects.first()
+                alijo_representativo = AgrandarAlijo.objects.first()
+                return render(request, 'core/productos/extensiones.html', {
+                    'skin_imagen': static('img/skins.png'),
+                    'skin_descripcion': "Accede a una variedad de opciones de personalización visual para tu personaje. Adapta tu estilo en el juego con atuendos únicos y accesorios, reflejando tu personalidad o estrategias tácticas.",
+                    'pve_imagen': static('img/pve.png'),
+                    'pve_descripcion':  "Explora nuevos desafíos en el entorno jugador contra entorno. Enfréntate a enemigos controlados por inteligencia artificial y perfecciona tus habilidades en un entorno más controlado, sin la presión del combate jugador contra jugador.",
+                    'alijo_imagen': static('img/stash.png'),
+                    'alijo_descripcion': "Amplía significativamente tu espacio de almacenamiento, proporcionando un inventario más grande para gestionar objetos valiosos y recursos esenciales. Esto te permitirá acumular más equipo sin preocuparte por el límite de espacio.",
+                    'pve_url_compra': reverse('extensiones_categoria', kwargs={'categoria': 'comprar_pve'}),
+                    'form_compra': form,
+                    'pve_representativo': pve_representativo,
+                })
         else:
+            messages.error(request, "El contenido PvE no está disponible.")
             return redirect('extensiones')
-    elif categoria == 'stash':
-        alijos = AgrandarAlijo.objects.all()
-        return render(request, 'core/productos/stash.html', {'alijos': alijos})
     else:
         skin_representativo = Skins.objects.first()
         pve_representativo = Pve.objects.first()
@@ -223,6 +275,28 @@ def Extensiones(request, categoria=None):
             'pve_url_compra': reverse('extensiones_categoria', kwargs={'categoria': 'comprar_pve'}),
         })
 
-
+@login_required
 def Stash(request):
-    return render(request, 'core/productos/stash.html')
+    alijos = AgrandarAlijo.objects.all()
+    form = ComprarProductoForm()
+    if request.method == 'POST':
+        form = ComprarProductoForm(request.POST)
+        if form.is_valid():
+            alijo_id = form.cleaned_data['object_id']
+            content_type = ContentType.objects.get_for_model(AgrandarAlijo)
+            try:
+                alijo = get_object_or_404(AgrandarAlijo, pk=alijo_id)
+                if not Compra.objects.filter(usuario=request.user, content_type=content_type, object_id=alijo_id).exists():
+                    Compra.objects.create(usuario=request.user, content_type=content_type, object_id=alijo_id)
+                    messages.success(request, f'¡Alijo "{alijo.nombre}" comprado exitosamente!')
+                    return redirect('exito')
+                else:
+                    messages.warning(request, f'Ya compraste el alijo "{alijo.nombre}".')
+                    return redirect('extensiones_categoria', categoria='stash')
+            except AgrandarAlijo.DoesNotExist:
+                messages.error(request, 'La mejora de alijo seleccionada no existe.')
+            except ContentType.DoesNotExist:
+                messages.error(request, 'Tipo de contenido inválido.')
+        else:
+            messages.error(request, 'Error en el formulario de compra.')
+    return render(request, 'core/productos/stash.html', {'alijos': alijos, 'form_compra': form})

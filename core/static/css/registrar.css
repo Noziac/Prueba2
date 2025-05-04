@@ -1,4 +1,3 @@
-/* Estilos generales */
 * {
   margin: 0;
   padding: 0;
@@ -6,24 +5,25 @@
 }
 
 body {
-  font-family: Montserrat;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/bg_reg_ini.jpg");
-  background-color: rgb(14, 14, 14);
+  background-color: rgb(34, 34, 34);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/background1.jpg");
+  background-size: cover;     
+  background-attachment: fixed; 
+  background-position: center;  
+  background-repeat: no-repeat; 
+  overflow-y: hidden;
 }
 
-/**********  GRID GENERAL  **********/
+/* GRID GENERAL */
 .parent {
-  display: felx;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
   gap: 0px;
-  scroll-behavior: smooth;
-  width: 100%;
-  height: auto;
-  min-height: 100vh;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth; 
+  height: 100vh;
   overflow-x: hidden;
-  overflow-y: hidden;
-  font-family: Montserrat;
-  /*background-color: red; */
+  background-color: rgb( 14, 14, 14);
 }
 
 /**********  HEADER  **********/
@@ -38,8 +38,8 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
-  background-color: rgba(35, 35, 35, 1);
+  height: 40px;
+  background-color: rgba(35, 35, 35, 0.5);
   box-shadow: 0px 4px 10px rgba(240, 245, 220, 0.5);
   z-index: 999;
   display: flex;
@@ -178,18 +178,17 @@ h2 {
 
 /********** FOOTER  **********/
 .div3 {
-  grid-column: span 12 / span 12;
-  background-color: rgba(35, 35, 35, 1);
+    grid-column: span 12 / span 12;
+    background-color: rgb(34, 34, 34);
 }
 
 #cont-footer {
-  width: 100%;
-  height: 50px;
-  background-color: rgba(35, 35, 35, 1);
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
-  font-size: 0.8rem;
-  bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: rgb(34, 34, 34);
+    color: rgb(245, 245, 220);
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0px 4px 10px rgba(240, 245, 220, 1);
+    bottom: 0;
 }

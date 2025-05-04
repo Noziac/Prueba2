@@ -220,3 +220,36 @@ searchInput.addEventListener('input', function() {
 });
 
 FleaMarket();
+
+/* RESEÑAS */
+document.addEventListener('DOMContentLoaded', function() {
+    const ratingInputs = document.querySelectorAll('.rating-input');
+    ratingInputs.forEach(input => {
+        const stars = input.querySelectorAll('.star');
+        const ratingInput = input.querySelector('input[name="rating"]');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const ratingValue = this.dataset.rating;
+                ratingInput.value = ratingValue;
+                stars.forEach(s => s.classList.remove('active'));
+                for (let i = 0; i < ratingValue; i++) {
+                    stars[i].classList.add('active');
+                }
+            });
+        });
+    });
+
+    const reviewForms = document.querySelectorAll('[id^="review-form-"]');
+    reviewForms.forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formId = this.id;
+            const versionId = formId.split('-')[2];
+            const rating = this.querySelector('input[name="rating"]').value;
+            const comment = this.querySelector('textarea[name="comment"]').value;
+            console.log(`Reseña simulada enviada para la versión ${versionId}:`, { rating: rating, comment: comment });
+            alert(`Reseña enviada (simulado) para la versión ${versionId}!`);
+        });
+    });
+});

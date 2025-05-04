@@ -1,0 +1,51 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}Dejar Reseña{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Dejar una Reseña para {{ producto.nombre }}</h2>
+        <form id="review-form" method="post" action="{% url 'crear_reseña_api' %}"> {# Reemplaza con la URL de tu API #}
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ producto.id_version }}">
+            <div class="mb-3">
+                <label for="rating" class="form-label">Valoración:</label>
+                <div class="rating-input">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                    <input type="hidden" id="rating" name="rating" value="">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="comment" class="form-label">Comentario:</label>
+                <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+        </form>
+    </div>
+
+    {% block scripts %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const ratingInput = document.querySelector('.rating-input');
+                const stars = ratingInput.querySelectorAll('.star');
+                const ratingField = document.getElementById('rating');
+
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const ratingValue = this.dataset.rating;
+                        ratingField.value = ratingValue;
+                        stars.forEach(s => s.classList.remove('active'));
+                        for (let i = 0; i < ratingValue; i++) {
+                            stars[i].classList.add('active');
+                        }
+                    });
+                });
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

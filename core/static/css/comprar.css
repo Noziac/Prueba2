@@ -211,3 +211,77 @@ body {
         margin-top: 100px;
       }
 }   
+
+
+
+
+
+
+
+
+
+.reviews-section {
+    margin-top: 1rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.average-rating {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.average-rating .star {
+    color: gold; /* Estrellas llenas por defecto para la simulación */
+    cursor: default;
+    margin-right: 0.2rem;
+}
+
+.average-rating .average-score {
+    font-size: 0.9rem;
+    color: #777;
+    margin-left: 0.5rem;
+}
+
+.rating-input {
+    margin-bottom: 0.5rem;
+}
+
+.rating-input .star {
+    font-size: 1.2rem;
+    color: #ccc; /* Estrellas vacías por defecto en el input */
+    cursor: pointer;
+    margin-right: 0.2rem;
+}
+
+.rating-input .star.active {
+    color: gold; /* Estrellas seleccionadas */
+}
+
+.review-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.review-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.review-item .rating {
+    font-size: 1rem;
+    color: gold;
+    margin-bottom: 0.2rem;
+}
+
+.review-item .comment {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 0.2rem;
+}
+
+.review-item .author {
+    font-size: 0.8rem;
+    color: #555;
+}

@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'core',
     'rest_framework',
-    'rest_api',
+    'productos_api',
 ]
 
 LOGIN_REDIRECT_URL = '/'

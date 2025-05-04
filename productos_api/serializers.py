@@ -4,7 +4,7 @@ from core.models import Version, Skins, Pve, AgrandarAlijo
 class VersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Version
-        fields = ['id_version', 'activo', 'imagen']
+        fields = ['nombre', 'descripcion', 'precio', 'id_version', 'activo', 'imagen']
 
 class SkinsSerializer(serializers.ModelSerializer):
     facción_display = serializers.CharField(source='get_facción_display', read_only=True)

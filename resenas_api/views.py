@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
+
+from core.models import Resena
+from .serializers import ResenaSerializer
 
 # Create your views here.
+
+@csrf_exempt
+@api_view(['GET'])
+def lista_resenas(request):
+    if request.method == 'GET':
+        resenas = Resena.objects.all()
+        serilizer = ResenaSerializer(resenas, many=True)
+
+        return Response(serilizer.data)

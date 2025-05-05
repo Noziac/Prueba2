@@ -21,4 +21,5 @@ urlpatterns = [
     path('stash/', views.Stash, name='Stash'),
     path('perfil/', views.Perfil, name='perfil'),
     path('exito/', views.exito, name='exito'),
+    path('crear_reseña/', views.crear_reseña, name='crear_reseña'),
 ]

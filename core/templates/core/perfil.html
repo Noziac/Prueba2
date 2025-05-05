@@ -130,7 +130,36 @@
                         {% if compras %}
                             <ul>
                                 {% for compra in compras %}
-                                    <li>{{ compra.content_object }} (Comprado el {{ compra.fecha_compra }})</li>
+                                    <div class="compra-item">
+                                        <p><strong>Producto:</strong> {{ compra }}</p>
+
+                                        {% if compra.mi_reseña %}
+                                            <button type="button" class="ver-resena-btn" onclick="toggleResena('{{ compra.id }}')">Ver reseña</button>
+                                            <div id="resena-{{ compra.id }}" class="resena-contenido">
+                                                <p><strong>Evaluación:</strong> {{compra.mi_reseña.evaluacion}} </p>
+                                                <p><strong>Comentario:</strong> {{compra.mi_reseña.texto}} </p>
+                                            </div>
+                                        {% else %}
+                                            <p>No has dejado una reseña para este producto.</p>
+                                            <button type="button" class="crear-resena-btn" onclick="toggleFormulario('{{ compra.id }}')">Crear reseña</button>
+
+                                            <div id="formulario-resena-{{ compra.id }}" class="formulario-resena" style="display:none;">
+                                                <form method="post" action="{% url 'crear_reseña' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="content_type" value="{{ compra.content_type.model }}">
+                                                    <input type="hidden" name="object_id" value="{{ compra.object_id }}">
+                                                    
+                                                    <label for="texto-{{ compra.id }}">Comentario:</label>
+                                                    <textarea name="texto" id="texto-{{ compra.id }}" rows="3" required></textarea>
+                                            
+                                                    <label for="evaluacion-{{ compra.id }}">Evaluación (1 a 10):</label>
+                                                    <input type="number" name="evaluacion" id="evaluacion-{{ compra.id }}" min="1" max="10" required>
+                                            
+                                                    <button type="submit" class="enviar-resena-btn">Enviar reseña</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 {% endfor %}
                             </ul>
                         {% else %}
@@ -151,3 +180,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
+<!-- VER RESEÑAS -->
+<script>
+    function toggleResena(id) {
+        const resenaDiv = document.getElementById(`resena-${id}`)
+        if (resenaDiv.style.display === 'none') {
+            resenaDiv.style.display = 'block';
+        } else {
+            resenaDiv.style.display = 'none'
+        }
+    }
+</script>
+
+<!-- MOSTAR FORMULARIO -->
+<script>
+    function toggleFormulario(compraId) {
+        const formulario = document.getElementById('formulario-resena-' + compraId);
+        formulario.style.display = formulario.style.display === 'none' ? 'block' : 'none';
+    }
+</script>

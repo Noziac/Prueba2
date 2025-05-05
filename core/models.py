@@ -134,12 +134,14 @@ class Ticket(models.Model):
     def __str__(self):
         return f"Ticket #{self.id} - {self.asunto} ({self.usuario.username})"
 
+# Clase para comprar productos
 class Compra(models.Model):
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     fecha_compra = models.DateTimeField(auto_now_add=True)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
+    resena_hecha = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Compra"
@@ -148,3 +150,17 @@ class Compra(models.Model):
 
     def __str__(self):
         return f"Compra de {self.content_object} por {self.usuario.username} el {self.fecha_compra}"
+    
+# Clase para reseñas
+class Resena(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    texto = models.TextField()
+    evaluacion = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    compra = models.OneToOneField(Compra, on_delete=models.CASCADE, null=True, blank=True, related_name='mi_reseña')
+
+    def __str__(self):
+        return f"Reseña de {self.usuario.username} para {self.content_object}"

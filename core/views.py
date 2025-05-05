@@ -6,11 +6,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .models import Version, Skins, Pve, AgrandarAlijo, PerfilUsuario, Ticket, Version, Compra  
+from .models import Version, Skins, Pve, AgrandarAlijo, PerfilUsuario, Ticket, Version, Compra, Resena
 from django.templatetags.static import static
 from django.urls import reverse
 from django.contrib import messages
-from .forms import EditarPerfilForm, EditarAvatarForm, CrearTicketForm, ComprarProductoForm
+from .forms import EditarPerfilForm, EditarAvatarForm, CrearTicketForm, ComprarProductoForm, ResenaForm
 from django.db import IntegrityError
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -57,8 +57,8 @@ def Perfil(request):
     info_form = EditarPerfilForm(instance=request.user)
     password_form = PasswordChangeForm(request.user)
     avatar_form = EditarAvatarForm(instance=request.user.perfil)
-
-    compras = Compra.objects.filter(usuario=request.user)
+    compras = Compra.objects.filter(usuario=request.user).order_by('-fecha_compra')
+    form_resena = ResenaForm()
 
     if request.method == 'POST':
         if 'actualizar_info' in request.POST:
@@ -86,6 +86,7 @@ def Perfil(request):
         'form_password': password_form,
         'form_avatar': avatar_form,
         'compras': compras,
+        'form_resena': form_resena,
     }
     return render(request, 'core/perfil.html', context)
 
@@ -300,3 +301,66 @@ def Stash(request):
         else:
             messages.error(request, 'Error en el formulario de compra.')
     return render(request, 'core/productos/stash.html', {'alijos': alijos, 'form_compra': form})
+
+def crear_reseña(request):
+    if request.method == 'POST':
+        form_resena = ResenaForm(request.POST)
+        if form_resena.is_valid():
+            texto = form_resena.cleaned_data['texto']
+            evaluacion = form_resena.cleaned_data['evaluacion']
+            content_type_str = request.POST.get('content_type')
+            object_id_str = request.POST.get('object_id')
+
+            try:
+                content_type = ContentType.objects.get(model=content_type_str)
+                obj = content_type.get_object_for_this_type(pk=object_id_str)
+                print(f"DEBUG: Objeto relacionado encontrado: {obj}")
+
+                try:
+                    compra = Compra.objects.get(
+                        usuario=request.user,
+                        content_type=content_type,
+                        object_id=object_id_str
+                    )
+                    print(f"DEBUG: Objeto Compra encontrado PARA LA RESEÑA: {compra}, ID: {compra.id}")
+
+                    if Resena.objects.filter(compra=compra).exists():
+                        messages.error(request, 'Ya has dejado una reseña para este producto.')
+                        print("DEBUG: Ya existe una reseña para esta compra.")
+                        return redirect('Perfil')
+                    else:
+                        reseña = Resena.objects.create(
+                            usuario=request.user,
+                            content_type=content_type,
+                            object_id=object_id_str,
+                            texto=texto,
+                            evaluacion=evaluacion,
+                            compra=compra
+                        )
+                        print(f"DEBUG: Reseña creada: {reseña.id}, vinculada a Compra ID: {compra.id}")
+
+                        compra.reseña_hecha = True
+                        compra.save()
+                        print(f"DEBUG: compra.reseña_hecha guardado como True para Compra ID: {compra.id}")
+
+                        messages.success(request, 'Tu reseña ha sido publicada.')
+                        return redirect('Perfil')
+
+                except Compra.DoesNotExist:
+                    print("DEBUG: ¡¡¡ERROR!!! Objeto Compra NO encontrado")
+                    messages.error(request, 'Error al publicar la reseña.')
+                    return redirect('Perfil')
+
+            except ContentType.DoesNotExist:
+                print("DEBUG: ¡¡¡ERROR!!! ContentType no encontrado")
+                messages.error(request, 'Error al publicar la reseña.')
+                return redirect('Perfil')
+            except Exception as e:
+                print(f"DEBUG: ¡¡¡ERROR!!! Otro error: {e}")
+                messages.error(request, 'Error al publicar la reseña.')
+                return redirect('Perfil')
+        else:
+            messages.error(request, 'Por favor, corrige los errores del formulario.')
+            return redirect('Perfil')
+    else:
+        return redirect('Perfil')

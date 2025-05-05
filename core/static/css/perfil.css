@@ -323,3 +323,55 @@ h2 {
         margin-bottom: 50px;
     }
 }   
+
+/* RESEÑAS */
+/* Estilo base del contenedor de cada compra */
+.compra-item {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Botón para ver/ocultar reseñas */
+.ver-resena-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ver-resena-btn:hover {
+    background-color: #45a049;
+}
+
+/* Contenedor de reseña oculto por defecto */
+.resena-contenido {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #eef6ec;
+    border-left: 4px solid #4CAF50;
+    border-radius: 6px;
+}
+
+.crear-resena-btn {
+    background-color: #2196F3;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 8px;
+}
+
+.crear-resena-btn:hover {
+    background-color: #1976D2;
+}

@@ -19,22 +19,33 @@
         <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 g-2">
             {% for version in versiones %}
                 <div class="col">
-                    <div class="card shadow-sm h-100">
-                        {% if version.imagen %}
-                            <img src="{{ version.imagen.url }}" class="card-img-top object-fit-cover versiones" alt="{{ version.nombre }}">
-                        {% endif %}
+                    <div class="card shadow-sm h-100 text-center">
+                        <img src="{{ version.imagen.url }}" class="card-img-top object-fit-cover" alt="{{ version.nombre }}">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ version.nombre }}</h5>
-                            <p class="card-text">{{ version.descripcion|truncatechars:100 }}</p>
-                            <p class="card-text fw-bold">${{ version.precio|intcomma }} CLP</p>
-                            <div class="d-grid gap-2">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    {{ form_compra }}
-                                    <input type="hidden" name="content_type" value="version">
-                                    <input type="hidden" name="object_id" value="{{ version.id_version }}">
-                                    <button class="btn btn-outline-btn-primary" type="submit">Comprar</button>
-                                </form>
+                            <p class="card-text">{{ version.descripcion|default:"Sin descripción."|truncatechars:100 }}</p>
+                            <p class="card-text">Precio: ${{ version.precio }}</p>
+                            <form method="post" action="{% url 'Versiones' %}">
+                                {% csrf_token %}
+                                {{ form_compra }}
+                                <input type="hidden" name="content_type" value="version">
+                                <input type="hidden" name="object_id" value="{{ version.id_version }}">
+                                <button type="submit" class="btn btn-outline-btn-primary">Comprar</button>
+                            </form>
+            
+                            <div class="reseñas-container mt-3">
+                                <button type="button" class="btn btn-secondary w-100 text-start" data-bs-toggle="collapse" data-bs-target="#reseñas-{{ version.id_version }}-version" aria-expanded="false" aria-controls="reseñas-{{ version.id_version }}-version">
+                                    Ver Reseñas ({{ reseñas|length }})
+                                </button>
+                                <ul class="collapse reseñas-lista" id="reseñas-{{ version.id_version }}-version">
+                                    {% if reseñas %}
+                                        {% for reseña in reseñas %}
+                                            <li>{{ reseña.usuario.username }}: {{ reseña.texto }} ({{ reseña.evaluacion }} estrellas)</li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>Aún no hay reseñas para este producto.</li>
+                                    {% endif %}
+                                </ul>
                             </div>
                         </div>
                     </div>

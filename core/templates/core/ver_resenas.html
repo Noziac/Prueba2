@@ -1,0 +1,16 @@
+<h2>Reseñas para {{ producto.nombre }}</h2>
+
+{% if reseñas %}
+    <ul class="lista-resenas">
+        {% for resena in reseñas %}
+            <li class="resena">
+                <strong>{{ resena.usuario.username }}</strong> — 
+                {{ resena.evaluacion }}/10<br>
+                <em>{{ resena.fecha_creacion|date:"d M Y, H:i" }}</em>
+                <p>{{ resena.texto }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay reseñas para este producto todavía.</p>
+{% endif %}

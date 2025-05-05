@@ -364,3 +364,14 @@ def crear_reseña(request):
             return redirect('Perfil')
     else:
         return redirect('Perfil')
+    
+def ver_reseñas_producto(request, content_type_id, object_id):
+    content_type = get_object_or_404(ContentType, pk=content_type_id)
+    producto = content_type.get_object_for_this_type(pk=object_id)
+    reseñas = Resena.objects.filter(content_type=content_type, object_id=object_id).order_by('-fecha_creacion')
+
+    context = {
+        'producto': producto,
+        'reseñas': reseñas,
+    }
+    return render(request, 'core/ver_resenas.html', context)

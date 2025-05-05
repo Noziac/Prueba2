@@ -32,21 +32,6 @@
                                 <input type="hidden" name="object_id" value="{{ version.id_version }}">
                                 <button type="submit" class="btn btn-outline-btn-primary">Comprar</button>
                             </form>
-            
-                            <div class="reseñas-container mt-3">
-                                <button type="button" class="btn btn-secondary w-100 text-start" data-bs-toggle="collapse" data-bs-target="#reseñas-{{ version.id_version }}-version" aria-expanded="false" aria-controls="reseñas-{{ version.id_version }}-version">
-                                    Ver Reseñas ({{ reseñas|length }})
-                                </button>
-                                <ul class="collapse reseñas-lista" id="reseñas-{{ version.id_version }}-version">
-                                    {% if reseñas %}
-                                        {% for reseña in reseñas %}
-                                            <li>{{ reseña.usuario.username }}: {{ reseña.texto }} ({{ reseña.evaluacion }} estrellas)</li>
-                                        {% endfor %}
-                                    {% else %}
-                                        <li>Aún no hay reseñas para este producto.</li>
-                                    {% endif %}
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>

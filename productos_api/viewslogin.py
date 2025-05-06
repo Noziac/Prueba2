@@ -11,8 +11,8 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.authtoken.models import Token
 
 @csrf_exempt
-@api_view(['GET'])
-def login(request):
+@api_view(['POST'])
+def login_p(request):
     data = JSONParser().parse(request)
 
     username = data['username']

@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework import status
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from core.models import Version, Skins, Pve, AgrandarAlijo
 from .serializers import VersionSerializer, SkinsSerializer, PveSerializer, AgrandarAlijoSerializer
@@ -12,6 +15,7 @@ from .serializers import VersionSerializer, SkinsSerializer, PveSerializer, Agra
 
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def lista_productos(request):
     if request.method == 'GET':
         versiones = Version.objects.all()
@@ -33,6 +37,7 @@ def lista_productos(request):
 # LISTAS
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def lista_versiones(request):
     if request.method == 'GET':
         versiones = Version.objects.all()
@@ -42,6 +47,7 @@ def lista_versiones(request):
 
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def lista_skins(request):
     if request.method == 'GET':
         skins = Skins.objects.all()
@@ -51,6 +57,7 @@ def lista_skins(request):
 
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def lista_pve(request):
     if request.method == 'GET':
         pve = Pve.objects.all()
@@ -60,6 +67,7 @@ def lista_pve(request):
 
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def lista_alijos(request):
     if request.method == 'GET':
         alijos = AgrandarAlijo.objects.all()
@@ -70,9 +78,10 @@ def lista_alijos(request):
 # VISTAS
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def vista_versiones(request, id):
     try:
-        versiones = Version.objects.get(id=id)
+        versiones = Version.objects.get(id_version=id)
     except Version.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
@@ -82,6 +91,7 @@ def vista_versiones(request, id):
     
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def vista_skins(request, id):
     try:
         skins = Skins.objects.get(id=id)
@@ -94,6 +104,7 @@ def vista_skins(request, id):
     
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def vista_pve(request, id):
     try:
         pve = Pve.objects.get(id=id)
@@ -106,6 +117,7 @@ def vista_pve(request, id):
     
 @csrf_exempt
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def vista_alijos(request, id):
     try:
         alijo = AgrandarAlijo.objects.get(id=id)

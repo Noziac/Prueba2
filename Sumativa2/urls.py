@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from productos_api.viewsLogin import login_p
+from resenas_api.viewsLogin import login_r
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +27,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('api/', include('productos_api.urls')),
     path('api/', include('resenas_api.urls')),
+    path('login_p/', login_p, name='login'),
+    path('login_r/', login_r, name='login'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

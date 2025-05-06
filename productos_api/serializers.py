@@ -4,21 +4,19 @@ from core.models import Version, Skins, Pve, AgrandarAlijo
 class VersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Version
-        fields = ['nombre', 'descripcion', 'precio', 'id_version', 'activo', 'imagen']
+        fields = ['id_version', 'nombre', 'descripcion', 'precio', 'activo', 'imagen']
 
 class SkinsSerializer(serializers.ModelSerializer):
-    facción_display = serializers.CharField(source='get_facción_display', read_only=True)
-
     class Meta:
         model = Skins
-        fields = ['nombre', 'descripcion', 'precio', 'imagen', 'facción', 'facción_display']
+        fields = ['id', 'nombre', 'descripcion', 'precio', 'imagen', 'facción']
 
 class PveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pve
-        fields = ['nombre', 'descripcion', 'precio']
+        fields = ['id', 'nombre', 'descripcion', 'precio']
 
 class AgrandarAlijoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AgrandarAlijo
-        fields = ['nombre', 'descripcion', 'precio', 'imagen']
+        fields = ['id', 'nombre', 'descripcion', 'precio', 'imagen']

@@ -8,7 +8,7 @@ class ResenaSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Resena
-        fields = ['usuario', 'nombre_producto', 'texto', 'evaluacion', 'fecha_creacion']
+        fields = ['id', 'usuario', 'nombre_producto', 'texto', 'evaluacion', 'fecha_creacion']
 
     def get_nombre_producto(self, instance):
         try:

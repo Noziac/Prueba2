@@ -4,38 +4,33 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
+User = get_user_model()
+
 # Clase para los usuarios
 class PerfilUsuario(models.Model):
-    usuario = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='perfil')
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
     rol = models.CharField(max_length=20, choices=settings.ROLES, default='cliente')
-    nombre = models.CharField(max_length=100, blank=True, null=True)
-    apellido = models.CharField(max_length=100, blank=True, null=True)
-    username = models.CharField(max_length=50, unique=True, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    email = models.EmailField(unique=True, blank=True, null=True) 
-    contrasenna = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return f"{self.usuario.username} - {self.rol}"
 
-    def save(self, *args, **kwargs):
-        if self.usuario:
-            self.email = self.usuario.email
-            self.password_hasheada = self.usuario.password
-        super().save(*args, **kwargs)
+@receiver(post_save, sender=User)
+def crear_perfil_usuario(sender, instance, created, **kwargs):
+    if created:
+        PerfilUsuario.objects.create(usuario=instance)
 
-    def set_password(self, raw_password):
-        self.usuario.set_password(raw_password)
-        self.contrasenna = self.usuario.password
-        self.usuario.save()
-        self.save()
-
-    @property
-    def password(self):
-        return self.contrasenna
+@receiver(post_save, sender=User)
+def guardar_perfil_usuario(sender, instance, **kwargs):
+    try:
+        instance.perfil.save()
+    except PerfilUsuario.DoesNotExist:
+        PerfilUsuario.objects.create(usuario=instance)
 
 # Modelo Base para Productos (Abstracto)
 class Producto(models.Model):

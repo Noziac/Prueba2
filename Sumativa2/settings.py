@@ -87,7 +87,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'xe',
-        'USER': 'c##sumativa2',
+        'USER': 'c##eft',
         'PASSWORD': 'OracleCloud123',
         'HOST': 'localhost',
         'PORT': '1521'

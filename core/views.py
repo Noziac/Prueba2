@@ -260,7 +260,7 @@ def Extensiones(request, categoria=None):
                 })
         else:
             messages.error(request, "El contenido PvE no está disponible.")
-            return redirect('extensiones')
+            return redirect('Extensiones')
     else:
         skin_representativo = Skins.objects.first()
         pve_representativo = Pve.objects.first()

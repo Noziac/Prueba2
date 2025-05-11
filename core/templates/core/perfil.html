@@ -51,8 +51,8 @@
             </div>
         </header>
             <div class="div2">
-                <div id="cont-perfil">
-                    <h1>Perfil de Usuario</h1>
+                <h1>Perfil de Usuario</h1>
+                <div class="perfil-info">
                     {% if user.is_authenticated %}
                         {% if messages %}
                             {% for message in messages %}
@@ -74,101 +74,100 @@
                             </form>
                         </div>
 
-                        <hr class="mt-4 mb-3">
-                        <h2>Cambiar Contraseña</h2>
-                        <form method="post" action="{% url 'perfil' %}">
-                            {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="{{ form_password.old_password.id_for_label }}" class="form-label"><i class="fas fa-lock me-2"></i> Contraseña Actual:</label>
-                                {{ form_password.old_password }}
-                                <div class="form-text text-danger">{{ form_password.old_password.errors }}</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="{{ form_password.new_password1.id_for_label }}" class="form-label"><i class="fas fa-key me-2"></i> Nueva Contraseña:</label>
-                                {{ form_password.new_password1 }}
-                                <div class="form-text text-danger">{{ form_password.new_password1.errors }}</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="{{ form_password.new_password2.id_for_label }}" class="form-label"><i class="fas fa-key me-2"></i> Confirmar Nueva Contraseña:</label>
-                                {{ form_password.new_password2 }}
-                                <div class="form-text text-danger">{{ form_password.new_password2.errors }}</div>
-                            </div>
-                            <button type="submit" class="btn btn-warning ms-2" name="cambiar_password">Cambiar Contraseña</button>
-                        </form>
+                        <div class="left-column"> <hr class="mt-4 mb-3">
+                            <h2>Cambiar Contraseña</h2>
+                            <form method="post" action="{% url 'perfil' %}" class="cambiar-contrasena-form">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="{{ form_password.old_password.id_for_label }}" class="form-label"><i class="fas fa-lock me-2"></i> Contraseña Actual:</label>
+                                    {{ form_password.old_password }}
+                                    <div class="form-text text-danger">{{ form_password.old_password.errors }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form_password.new_password1.id_for_label }}" class="form-label"><i class="fas fa-key me-2"></i> Nueva Contraseña:</label>
+                                    {{ form_password.new_password1 }}
+                                    <div class="form-text text-danger">{{ form_password.new_password1.errors }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form_password.new_password2.id_for_label }}" class="form-label"><i class="fas fa-key me-2"></i> Confirmar Nueva Contraseña:</label>
+                                    {{ form_password.new_password2 }}
+                                    <div class="form-text text-danger">{{ form_password.new_password2.errors }}</div>
+                                </div>
+                                <button type="submit" class="btn btn-warning ms-2" name="cambiar_password">Cambiar Contraseña</button>
+                            </form>
 
-                        <hr class="mt-4 mb-3">
-                        <h2>Información del Perfil</h2>
-                        <form method="post" action="{% url 'perfil' %}">
-                            {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="{{ form_info.username.id_for_label }}" class="form-label"><i class="fas fa-user me-2"></i> Nombre de Usuario:</label>
-                                {{ form_info.username }}
-                                <div class="form-text text-danger">{{ form_info.username.errors }}</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="{{ form_info.first_name.id_for_label }}" class="form-label"><i class="fas fa-signature me-2"></i> Nombre:</label>
-                                {{ form_info.first_name }}
-                                <div class="form-text text-danger">{{ form_info.first_name.errors }}</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="{{ form_info.last_name.id_for_label }}" class="form-label"><i class="fas fa-pen-fancy me-2"></i> Apellido:</label>
-                                {{ form_info.last_name }}
-                                <div class="form-text text-danger">{{ form_info.last_name.errors }}</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="{{ form_info.email.id_for_label }}" class="form-label"><i class="fas fa-envelope me-2"></i> Correo Electrónico:</label>
-                                {{ form_info.email }}
-                                <div class="form-text text-danger">{{ form_info.email.errors }}</div>
-                            </div>
+                            <hr class="mt-4 mb-3">
+                            <h2>Información del Perfil</h2>
+                            <form method="post" action="{% url 'perfil' %}" class="info-perfil-form">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="{{ form_info.username.id_for_label }}" class="form-label"><i class="fas fa-user me-2"></i> Nombre de Usuario:</label>
+                                    {{ form_info.username }}
+                                    <div class="form-text text-danger">{{ form_info.username.errors }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form_info.first_name.id_for_label }}" class="form-label"><i class="fas fa-signature me-2"></i> Nombre:</label>
+                                    {{ form_info.first_name }}
+                                    <div class="form-text text-danger">{{ form_info.first_name.errors }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form_info.last_name.id_for_label }}" class="form-label"><i class="fas fa-pen-fancy me-2"></i> Apellido:</label>
+                                    {{ form_info.last_name }}
+                                    <div class="form-text text-danger">{{ form_info.last_name.errors }}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form_info.email.id_for_label }}" class="form-label"><i class="fas fa-envelope me-2"></i> Correo Electrónico:</label>
+                                    {{ form_info.email }}
+                                    <div class="form-text text-danger">{{ form_info.email.errors }}</div>
+                                </div>
 
-                            <button type="submit" class="btn btn-primary" name="actualizar_info">Guardar Cambios</button>
-                            <a href="{% url 'logout' %}" class="btn btn-danger ms-2">Cerrar Sesión</a>
-                        </form>
-
-                        <hr class="mt-4 mb-3">
-                        <h2>Productos Comprados</h2>
-                        {% if compras %}
-                            <ul>
-                                {% for compra in compras %}
-                                    <div class="compra-item">
-                                        <p><strong>Producto:</strong> {{ compra }}</p>
-
-                                        {% if compra.mi_reseña %}
-                                            <button type="button" class="ver-resena-btn" onclick="toggleResena('{{ compra.id }}')">Ver reseña</button>
-                                            <div id="resena-{{ compra.id }}" class="resena-contenido">
-                                                <p><strong>Evaluación:</strong> {{compra.mi_reseña.evaluacion}} </p>
-                                                <p><strong>Comentario:</strong> {{compra.mi_reseña.texto}} </p>
-                                            </div>
-                                        {% else %}
-                                            <p>No has dejado una reseña para este producto.</p>
-                                            <button type="button" class="crear-resena-btn" onclick="toggleFormulario('{{ compra.id }}')">Crear reseña</button>
-
-                                            <div id="formulario-resena-{{ compra.id }}" class="formulario-resena" style="display:none;">
-                                                <form method="post" action="{% url 'crear_reseña' %}">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="content_type" value="{{ compra.content_type.model }}">
-                                                    <input type="hidden" name="object_id" value="{{ compra.object_id }}">
-                                                    
-                                                    <label for="texto-{{ compra.id }}">Comentario:</label>
-                                                    <textarea name="texto" id="texto-{{ compra.id }}" rows="3" required></textarea>
-                                            
-                                                    <label for="evaluacion-{{ compra.id }}">Evaluación (1 a 10):</label>
-                                                    <input type="number" name="evaluacion" id="evaluacion-{{ compra.id }}" min="1" max="10" required>
-                                            
-                                                    <button type="submit" class="enviar-resena-btn">Enviar reseña</button>
-                                                </form>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p>No has comprado ningún producto aún.</p>
-                        {% endif %}
-
-                    {% else %}
+                                <button type="submit" class="btn btn-primary" name="actualizar_info">Guardar Cambios</button>
+                                <a href="{% url 'logout' %}" class="btn btn-danger ms-2">Cerrar Sesión</a>
+                            </form>
+                        </div> {% else %}
                         <p>No estás autenticado.</p>
                         <a href="{% url 'Ingresar' %}" class="btn btn-primary">Iniciar Sesión</a>
+                    {% endif %}
+                </div>
+                <div class="productos-comprados">
+                    <h2>Productos Comprados</h2>
+                    {% if compras %}
+                        <ul>
+                            {% for compra in compras %}
+                                <div class="compra-item">
+                                    <p><strong>Producto:</strong> {{ compra }}</p>
+
+                                    {% if compra.mi_reseña %}
+                                        <button type="button" class="ver-resena-btn" onclick="toggleResena('{{ compra.id }}')">Ver reseña</button>
+                                        <div id="resena-{{ compra.id }}" class="resena-contenido">
+                                            <p><strong>Evaluación:</strong> {{compra.mi_reseña.evaluacion}} </p>
+                                            <p><strong>Comentario:</strong> {{compra.mi_reseña.texto}} </p>
+                                        </div>
+                                    {% else %}
+                                        <p>No has dejado una reseña para este producto.</p>
+                                        <button type="button" class="crear-resena-btn" onclick="toggleFormulario('{{ compra.id }}')">Crear reseña</button>
+
+                                        <div id="formulario-resena-{{ compra.id }}" class="formulario-resena" style="display:none;">
+                                            <form method="post" action="{% url 'crear_reseña' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="content_type" value="{{ compra.content_type.model }}">
+                                                <input type="hidden" name="object_id" value="{{ compra.object_id }}">
+
+                                                <label for="texto-{{ compra.id }}">Comentario:</label>
+                                                <textarea name="texto" id="texto-{{ compra.id }}" rows="3" required></textarea>
+
+                                                <label for="evaluacion-{{ compra.id }}">Evaluación (1 a 10):</label>
+                                                <input type="number" name="evaluacion" id="evaluacion-{{ compra.id }}" min="1" max="10" required>
+
+                                                <button type="submit" class="enviar-resena-btn">Enviar reseña</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No has comprado ningún producto aún.</p>
                     {% endif %}
                 </div>
             </div>

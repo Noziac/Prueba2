@@ -10,15 +10,14 @@
 
 /* IMAGEN */
 .card-img-top.object-fit-cover {
-    width: 400px;
-    height: 50%;
+
 }
 
 /* TEXTO */
 .card-body.d-flex.flex-column.justify-content-between {
     margin: 0;
     padding: 0;
-    height: 70%;
+    height: 100%;
     align-items: center;
     justify-content: center;
 }
@@ -71,7 +70,7 @@
     }
 }
 
-/* Estilos para escritorios (ancho mínimo de 1025px) */
+/* Estilos para escritorios */
 @media (min-width: 992px) {
     .div2 {
         margin-top: 50px;
@@ -82,7 +81,15 @@
     }
 
     .card-img-top.object-fit-cover {
-        width: 400px;
+        width: 350px;
         height: auto;
+    }
+
+    .card-body.d-flex.flex-column.justify-content-between {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
     }
 } 

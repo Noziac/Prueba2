@@ -23,7 +23,6 @@ body {
     scroll-behavior: smooth; 
     height: 100vh;
     overflow-x: hidden;
-    background-color: rgb( 14, 14, 14);
 }
  
 /**********  HEADER  **********/
@@ -197,7 +196,6 @@ body {
 .div4 {
     display: grid;
     grid-column: span 12 / span 12;
-    background-color: rgb(34, 34, 34);
     grid-template-columns: 1fr 1fr;
     padding-top: 50px;
 }
@@ -252,7 +250,6 @@ body {
 .div5 {
     display: grid;
     grid-column: span 12 / span 12;
-    background-color: rgb(34, 34, 34);
     padding-left: 100px;
     padding-right: 100px;
     justify-content: center;
@@ -289,7 +286,6 @@ body {
 .div6 {
     display: grid;
     grid-column: span 12 / span 12;
-    background-color: rgb(34, 34, 34);
     padding: 20px 100px;
     justify-content: center;
     padding-top: 50px;
@@ -390,44 +386,150 @@ body {
 }
         
 /**********  EXTRAS  **********/
-.scroll-section {
-    scroll-snap-align: center;
-}
-
 @media (max-width: 600px) {
-    
+    /* CONTENIDO FLEA */
+    .flea-market-table {
+        max-width: 550px;
+        border-collapse: collapse;
+        color: rgb(220, 220, 220);
+    }
+
+    .flea-market-table th {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid rgb(80, 80, 80);
+        background-color: rgb(50, 50, 50);
+        font-weight: bold;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .flea-market-table tbody {
+        width: 100%;
+        display: block;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .flea-market-table tr {
+        display: flex;
+        width: 100%;
+    }
+
+    .flea-market-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid rgb(80, 80, 80);
+    }
+
+    .flea-market-table tbody tr:nth-child(even) {
+        background-color: rgb(40, 40, 40);
+    }
+
+    /* Definir anchos para las columnas (tanto th como td) */
+    .flea-market-table th:nth-child(1),
+    .flea-market-table td:nth-child(1) {
+        flex: 1;
+    }
+
+    .flea-market-table th:nth-child(2),
+    .flea-market-table td:nth-child(2) {
+        width: 85px;
+        flex-shrink: 0;
+    }
+
+    .flea-market-table th:nth-child(3),
+    .flea-market-table td:nth-child(3) {
+        width: 85px;
+        flex-shrink: 0;
+    }
+
+    .flea-market-table th:nth-child(4),
+    .flea-market-table td:nth-child(4) {
+        width: 85px;
+        flex-shrink: 0;
+    }
+
+    .flea-market-table th:nth-child(5),
+    .flea-market-table td:nth-child(5) {
+        width: 85px;
+        flex-shrink: 0;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 992px) {
-    #cont-twitch iframe {
-        width: 100%;
-        height: 50%;
-        align-items: center;
-        justify-items: center;
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/bg_twitch.png");
-        background-size:auto;
+        /* CONTENIDO FLEA */
+    .flea-market-table {
+        max-width: 900px;
+        border-collapse: collapse;
+        color: rgb(220, 220, 220);
     }
 
-    #cont-twitch h2 {
-        color: rgb(245, 245, 220);
-        padding-top: 50px;
-    }    
+    .flea-market-table th {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid rgb(80, 80, 80);
+        background-color: rgb(50, 50, 50);
+        font-weight: bold;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .flea-market-table tbody {
+        width: 100%;
+        display: block;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .flea-market-table tr {
+        display: flex;
+        width: 100%;
+    }
+
+    .flea-market-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid rgb(80, 80, 80);
+    }
+
+    .flea-market-table tbody tr:nth-child(even) {
+        background-color: rgb(40, 40, 40);
+    }
+
+    /* Definir anchos para las columnas (tanto th como td) */
+    .flea-market-table th:nth-child(1),
+    .flea-market-table td:nth-child(1) {
+        flex: 1;
+    }
+
+    .flea-market-table th:nth-child(2),
+    .flea-market-table td:nth-child(2) {
+        width: 100px;
+        flex-shrink: 0;
+    }
+
+    .flea-market-table th:nth-child(3),
+    .flea-market-table td:nth-child(3) {
+        width: 100px;
+        flex-shrink: 0;
+    }
+
+    .flea-market-table th:nth-child(4),
+    .flea-market-table td:nth-child(4) {
+        width: 100px;
+        flex-shrink: 0;
+    }
+
+    .flea-market-table th:nth-child(5),
+    .flea-market-table td:nth-child(5) {
+        width: 100px;
+        flex-shrink: 0;
+    }
 }
 
-/* Estilos para escritorios (ancho mínimo de 1025px) */
-@media (min-width: 992px) {
-    #cont-twitch {
-        width: 100vw;
-        height: 100vh;
-        color: rgb(245, 245, 220);
-        margin-bottom: 100px; 
-    }    
-
-    #cont-twitch h2 {
-        color: rgb(245, 245, 220);
-        padding-top: 60px; 
-    }    
-}
 
 
 

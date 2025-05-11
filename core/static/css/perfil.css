@@ -6,7 +6,7 @@
 
 body {
     background-color: rgb(34, 34, 34);
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/bg_reg_ini.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("../img/bg_reg_ini.jpg");
     background-size: cover;     
     background-attachment: fixed; 
     background-position: center;  
@@ -86,8 +86,11 @@ body {
     width: 100%;
     height: auto;
     background-color: transparent;
-    align-items: center;
+    align-items: start;
     justify-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto;
     /*background-color: rgb(14, 14, 14);*/
 }
 
@@ -104,6 +107,7 @@ body {
 
 h1 {
     color: rgb(154, 136, 102);
+    margin-top: 100px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -272,57 +276,44 @@ h2 {
 
 /**********  EXTRAS  **********/
 @media (max-width: 600px) {
-    .div2 {
-        grid-template-columns: 1fr;
-        align-items: stretch;
-        margin-top: 50px;
-    }
-
-    /* VERSIONES */
-    .card-img-top.object-fit-cover {
-        width: 200px;
-        height: auto;
-    }
-
-    h1 {
-        margin-bottom: 50px;
+    .perfil-info {
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(35, 35, 35, 0.0);
+        color: rgb(240, 245, 220);
+        margin-right: 30px;
+        margin-bottom: 20px;
     }
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
-    .div2 {
-        grid-template-columns: 1fr 1fr;
-        height: auto;
-        align-items: stretch;
-        margin-top: 50px;
-    }
-
-    /* VERSIONES */
-    .card-img-top.object-fit-cover {
-        width: 200px;
-        height: auto;
+    .perfil-info {
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(35, 35, 35, 0.0);
+        color: rgb(240, 245, 220);
+        margin-right: 30px;
+        margin-bottom: 20px;
     }
 }
 
-/* Estilos para escritorios (ancho mínimo de 1025px) */
 @media (min-width: 992px) {
-    .div2 {
-        margin-top: 50px;
-        align-items: stretch;
-        justify-content: center;
-        grid-template-columns: 1fr;
-    }
 
-    /* VERSIONES */
-    .card-img-top.object-fit-cover {
-        width: 800px;
-        height: auto;
-    }
-
-    h1 {
-        margin-bottom: 50px;
-    }
 }   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* RESEÑAS */
 /* Estilo base del contenedor de cada compra */
@@ -374,4 +365,141 @@ h2 {
 
 .crear-resena-btn:hover {
     background-color: #1976D2;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor para la información del perfil (izquierda) */
+.perfil-info {
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(35, 35, 35, 0.0);
+    color: rgb(240, 245, 220);
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+/* Contenedor para los productos comprados (derecha) */
+.productos-comprados {
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(35, 35, 35, 0.0);
+    color: rgb(240, 245, 220);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.productos-comprados p {
+    justify-self: center;
+}
+
+h1 {
+    color: rgb(154, 136, 102);
+    margin-bottom: 20px; /* Reduce el margen inferior del título principal */
+    text-align: center;
+    grid-column: 1 / 3; /* Ocupa ambas columnas */
+}
+
+h2 {
+    color: rgb(154, 136, 102);
+    margin-bottom: 15px; /* Reduce el margen inferior de los subtítulos */
+}
+
+/* Mueve el contenedor del avatar dentro de perfil-info */
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Aplica estilos a los formularios dentro de perfil-info */
+.perfil-info form {
+    margin-bottom: 20px;
+}
+
+/* Estilos específicos para el formulario de cambio de contraseña */
+.cambiar-contrasena-form .mb-3 label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgb(154, 136, 102);
+    font-weight: bold;
+}
+
+.cambiar-contrasena-form .mb-3 input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(154, 136, 102, 0.5);
+    border-radius: 5px;
+    background-color: rgba(50, 50, 50, 0.7);
+    color: rgb(240, 245, 220);
+    font-size: 1rem;
+}
+
+.cambiar-contrasena-form .mb-3 .form-text.text-danger {
+    font-size: 0.8rem;
+    color: rgb(255, 80, 80);
+    display: block;
+    margin-top: 5px;
+}
+
+/* Estilos específicos para el formulario de información del perfil */
+.info-perfil-form .mb-3 label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgb(154, 136, 102);
+    font-weight: bold;
+}
+
+.info-perfil-form .mb-3 input[type="text"],
+.info-perfil-form .mb-3 input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(154, 136, 102, 0.5);
+    border-radius: 5px;
+    background-color: rgba(50, 50, 50, 0.7);
+    color: rgb(240, 245, 220);
+    font-size: 1rem;
+}
+
+/* Estilos para la lista de productos comprados */
+.productos-comprados ul {
+    list-style: none;
+    padding: 0;
+}
+
+.productos-comprados .compra-item {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(50, 50, 50, 0.7);
+}
+
+/* ... otros estilos de reseñas ... */
+
+/* Media query para pantallas más pequeñas (volver a una sola columna) */
+@media (max-width: 768px) {
+    .div2 {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+    }
+
+    .perfil-info,
+    .productos-comprados {
+        margin-bottom: 20px; /* Añade margen inferior para separar los bloques */
+    }
+
+    h1 {
+        grid-column: 1 / 2; /* El título ocupa la columna */
+    }
 }

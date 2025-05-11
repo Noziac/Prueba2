@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Mapas();
 });
 
-/**********  TARKOV.DEV  **********/
+/**********  FLEA  **********/
 const searchInput = document.getElementById('searchInput');
 const fleaMarketBody = document.getElementById('fleaMarketBody');
 let allFleaMarketItems = [];
@@ -187,6 +187,7 @@ function FleaMarket() {
     });
 }
 
+/**********  TARKOV.DEV  **********/
 function datosFleaMarket(items) {
     if (!fleaMarketBody) return;
     fleaMarketBody.innerHTML = '';
